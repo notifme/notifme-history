@@ -7,7 +7,11 @@
   },
   "dependencies": {
     "babel-runtime": "^6.20.0",
-    "meteor-node-stubs": "~0.2.4"
+    "meteor-node-stubs": "~0.2.4",
+    "prop-types": "^15.6.0",
+    "react": "^15.6.2",
+    "react-addons-pure-render-mixin": "^15.6.2",
+    "react-dom": "^15.6.2"
   },
   "devDependencies": {
     "standard": "^10.0.3"
