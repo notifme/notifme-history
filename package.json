@@ -3,7 +3,7 @@
   "private": true,
   "scripts": {
     "lint": "standard",
-    "start": "meteor run"
+    "start": "env $(cat .env | xargs) meteor run"
   },
   "dependencies": {
     "babel-runtime": "^6.20.0",
