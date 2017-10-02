@@ -46,7 +46,7 @@ App.propTypes = {
 export default createContainer(() => {
   const currentUser = Meteor.user()
   return {
-    notifications: Notifications.find({}, {sort: {createdAt: -1}}).fetch(),
+    notifications: Notifications.find({}, {sort: {createdAt: -1}, limit: 50}).fetch(),
     currentUser,
     isAdmin: Roles.userIsInRole(currentUser, ROLES.admin)
   }

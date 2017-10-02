@@ -1,7 +1,9 @@
 /* global ServiceConfiguration, Accounts, Roles */
+import crypto from 'crypto'
 import {Meteor} from 'meteor/meteor'
 
 import {ROLES} from '../models/user'
+import {ApiKeys, SCOPES} from '../models/apikey'
 
 export function configure () {
   if (process.env.GOOGLE_CONSUMER_KEY && process.env.GOOGLE_CONSUMER_SECRET) {
@@ -23,6 +25,10 @@ export function configure () {
     }
     const userCount = Meteor.users.find().count()
     user.roles = [userCount === 0 ? ROLES.admin : ROLES.guest]
+    if (user.roles[0] === ROLES.admin) {
+      const token = crypto.randomBytes(16).toString('hex')
+      ApiKeys.insert({token, scopes: [SCOPES.write], createdAt: new Date(), byUser: user._id})
+    }
     Roles.addUsersToRoles(user._id, user.roles, Roles.GLOBAL_GROUP)
     return user
   })
