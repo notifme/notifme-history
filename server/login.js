@@ -1,5 +1,7 @@
-/* global ServiceConfiguration, Accounts */
+/* global ServiceConfiguration, Accounts, Roles */
 import {Meteor} from 'meteor/meteor'
+
+import {ROLES} from '../models/user'
 
 export function configure () {
   if (process.env.GOOGLE_CONSUMER_KEY && process.env.GOOGLE_CONSUMER_SECRET) {
@@ -14,13 +16,14 @@ export function configure () {
   }
 
   Accounts.onCreateUser((options, user) => {
-    const userCount = Meteor.users.find().count()
     user.email = user.services.google.email
-    user.isAdmin = userCount === 0
     user.profile = {
       name: user.services.google.name,
       picture: user.services.google.picture
     }
+    const userCount = Meteor.users.find().count()
+    user.roles = [userCount === 0 ? ROLES.admin : ROLES.guest]
+    Roles.addUsersToRoles(user._id, user.roles, Roles.GLOBAL_GROUP)
     return user
   })
 }
