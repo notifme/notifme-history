@@ -7,10 +7,19 @@ export function post (route, handler) {
   })
 }
 
-export function throwError (code, message) {
+export function throwError (code, message, extraInfo = {}) {
   const error = new Error(message)
   error.code = code
+  error.extraInfo = extraInfo
   throw error
+}
+
+export function throwFormError (error) {
+  if (error.invalidKeys) {
+    throwError(400, error.message, {errors: error.invalidKeys})
+  } else {
+    throw error
+  }
 }
 
 async function handle (request, response, handler, scope) {
@@ -30,7 +39,10 @@ async function handle (request, response, handler, scope) {
       response.end(JSON.stringify(jsonResponse))
     } catch (error) {
       response.statusCode = error.code || 500
-      response.end(JSON.stringify({error: error.code ? error.message : 'An unexpected error occurred.'}))
+      response.end(JSON.stringify({
+        error: error.code ? error.message : 'An unexpected error occurred.',
+        ...error.extraInfo
+      }))
     }
   }
 }

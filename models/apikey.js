@@ -7,6 +7,10 @@ export const SCOPES = {
 
 export const ApiKeys = new Mongo.Collection('apikeys')
 
+export function setIndexes () {
+  ApiKeys._ensureIndex({token: 1})
+}
+
 export function setTTL () {
   ApiKeys._ensureIndex({expireAt: 1}, {expireAfterSeconds: 0})
 }

@@ -22,6 +22,8 @@ msavin:mongol@4.0.1
 autopublish@1.0.7             # Publish all data to the clients (for prototyping)
 insecure@1.0.7                # Allow all DB writes from clients (for prototyping)
 iron:router@1.1.2
+aldeed:simple-schema@1.5.3
+aldeed:collection2@2.10.0
 react-meteor-data@0.2.13
 
 accounts-ui@1.1.9

@@ -6,6 +6,8 @@ import * as Login from './login.js'
 
 Meteor.startup(() => {
   ApiKeys.setTTL()
+  ApiKeys.setIndexes()
   Notifications.setTTL()
+  Notifications.setIndexes()
   Login.configure()
 })
