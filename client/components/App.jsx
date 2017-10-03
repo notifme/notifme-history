@@ -5,17 +5,10 @@ import PropTypes from 'prop-types'
 import React, {Component} from 'react'
 
 import AccountsUIWrapper from './AccountsUIWrapper.jsx'
-import Notification from './Notification.jsx'
-import {Notifications} from '../../models/notification.js'
+import Notifications from './Notifications.jsx'
 import {ROLES} from '../../models/user'
 
 class App extends Component {
-  renderNotifications () {
-    return this.props.notifications.map((notification) => (
-      <Notification key={notification._id} notification={notification} />
-    ))
-  }
-
   render () {
     const {currentUser, isAdmin} = this.props
     return (
@@ -26,27 +19,19 @@ class App extends Component {
         <AccountsUIWrapper />
         {isAdmin ? ' (admin!)' : null}
 
-        <header>
-          <h1>Notifications</h1>
-        </header>
-
-        <ul>
-          {this.renderNotifications()}
-        </ul>
+        <Notifications />
       </div>
     )
   }
 }
 
 App.propTypes = {
-  notifications: PropTypes.array.isRequired,
   currentUser: PropTypes.object
 }
 
 export default createContainer(() => {
   const currentUser = Meteor.user()
   return {
-    notifications: Notifications.find({}, {sort: {createdAt: -1}, limit: 50}).fetch(),
     currentUser,
     isAdmin: Roles.userIsInRole(currentUser, ROLES.admin)
   }

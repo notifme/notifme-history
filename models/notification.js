@@ -5,6 +5,7 @@ export const Notifications = new Mongo.Collection('notifications')
 
 export function setIndexes () {
   Notifications._ensureIndex({'id': 1})
+  Notifications._ensureIndex({'datetime': 1})
 }
 
 export function setTTL () {
@@ -19,7 +20,7 @@ Notifications.schema = new SimpleSchema({
     type: String
   },
   datetime: {
-    type: String
+    type: Date
   },
   title: {
     type: String
