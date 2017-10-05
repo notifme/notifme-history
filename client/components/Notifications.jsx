@@ -1,3 +1,4 @@
+import {Meteor} from 'meteor/meteor'
 import {createContainer} from 'meteor/react-meteor-data'
 import PropTypes from 'prop-types'
 import React, {Component} from 'react'
@@ -42,6 +43,7 @@ App.propTypes = {
 }
 
 export default createContainer(() => {
+  Meteor.subscribe('notifications')
   return {
     notifications: Notifications.find({}, {sort: {datetime: -1}, limit: 30}).fetch()
   }
