@@ -20,9 +20,9 @@
   .container-fluid {
     .row {
       padding: 0 0 4em 0;
-      &:nth-child(even) {
-        background: #F1F4F5;
-      }
+    }
+    .timeline {
+      margin-top: 40px;
     }
   }
 

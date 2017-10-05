@@ -14,7 +14,7 @@ export function setTTL () {
 
 Notifications.schema = new SimpleSchema({
   id: {
-    type: String
+    type: String, optional: true
   },
   channel: {
     type: String

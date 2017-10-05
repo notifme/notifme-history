@@ -14,6 +14,8 @@
     "react-addons-css-transition-group": "^15.6.2",
     "react-addons-pure-render-mixin": "^15.6.2",
     "react-dom": "^15.6.2",
+    "react-icons": "^2.2.5",
+    "react-infinite-scroller": "^1.0.15",
     "react-nl2br": "^0.3.0"
   },
   "devDependencies": {
