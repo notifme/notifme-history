@@ -15,8 +15,8 @@ export function throwError (code, message, extraInfo = {}) {
 }
 
 export function throwFormError (error) {
-  if (error.invalidKeys) {
-    throwError(400, error.message, {errors: error.invalidKeys})
+  if (error.error === 'validation-error') {
+    throwError(400, error.message, {errors: error.details})
   } else {
     throw error
   }
