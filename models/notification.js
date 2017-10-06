@@ -1,7 +1,13 @@
+import {Meteor} from 'meteor/meteor'
 import {Mongo} from 'meteor/mongo'
 import SimpleSchema from 'simpl-schema'
 
 export const Notifications = new Mongo.Collection('notifications')
+
+if (Meteor.isServer) {
+  setIndexes()
+  setTTL()
+}
 
 export function setIndexes () {
   Notifications._ensureIndex({'id': 1})
