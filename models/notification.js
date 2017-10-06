@@ -27,6 +27,9 @@ Notifications.schema = new SimpleSchema({
   },
   text: {
     type: String, optional: true
+  },
+  info: {
+    type: [String], optional: true
   }
 })
 

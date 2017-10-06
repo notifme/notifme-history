@@ -14,3 +14,7 @@ button {
     .text + & { margin-right: 7px; }
   }
 }
+
+.badge + .badge {
+  margin-left: 4px;
+}

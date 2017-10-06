@@ -66,15 +66,23 @@ class App extends Component {
               <InfiniteScroll loadMore={this.increaseLimit} hasMore={hasMore}>
                 <ReactCSSTransitionGroup component='ul' className='timeline timeline-centered'
                   transitionName='fade' transitionEnterTimeout={400} transitionLeaveTimeout={200}>
-                  {notifications.map((notification) => (
-                    <li key={notification._id} className='timeline-item left'>
+                  {notifications.map(({_id, datetime, channel, title, text, info}) => (
+                    <li key={_id} className='timeline-item left'>
                       <div className='timeline-info'>
-                        <DateFromNow date={notification.datetime.toISOString()} />
+                        <div className='datetime'>
+                          <DateFromNow date={datetime.toISOString()} />
+                        </div>
+                        <div>
+                          {(info || []).map((infoChunk, i) => (
+                            <span key={i} className='badge badge-pill badge-secondary'>{infoChunk}</span>
+                          ))}
+                          <span className='channel badge badge-pill badge-info'>{channel}</span>
+                        </div>
                       </div>
                       <div className='timeline-marker' />
                       <div className='timeline-content'>
-                        <h3 className='timeline-title'>{notification.title}</h3>
-                        <p>{nl2br(notification.text)}</p>
+                        <h3 className='timeline-title'>{title}</h3>
+                        <p>{nl2br(text)}</p>
                       </div>
                     </li>
                   ))}

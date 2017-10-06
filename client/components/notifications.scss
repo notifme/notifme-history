@@ -66,13 +66,19 @@
   /*----- TIMELINE INFO -----*/
 
   .timeline-info {
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 3px;
     margin: 0 0 .5em 0;
-    text-transform: uppercase;
-    white-space: nowrap;
+    .datetime {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+    .channel {
+      text-transform: capitalize;
+    }
   }
+
   /*----- TIMELINE MARKER -----*/
 
   .timeline-marker {
