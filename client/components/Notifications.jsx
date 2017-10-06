@@ -53,10 +53,10 @@ class App extends Component {
     return (
       <div className='notification-list-container'>
         <div className='container-fluid'>
-          <div className='clearfix'>
+          <div className='sticky-top clearfix'>
             <button className='btn btn-outline-info float-right' onClick={this.toggleAutoRefresh}>
               {autoRefresh.get() ? <FaPause /> : <FaPlay />}
-              <span className='text'>
+              <span className='text d-none d-md-inline'>
                 {autoRefresh.get() ? 'Deactivate auto-refresh' : 'Activate auto-refresh'}
               </span>
             </button>
