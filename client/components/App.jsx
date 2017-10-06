@@ -10,7 +10,7 @@ import {ROLES} from '../../models/user'
 
 class App extends Component {
   render () {
-    const {currentUser, isAdmin} = this.props
+    const {currentUser, isAdmin, isMember} = this.props
     return (
       <div className='container'>
         {currentUser && currentUser.profile.picture
@@ -19,20 +19,24 @@ class App extends Component {
         <AccountsUIWrapper />
         {isAdmin ? ' (admin!)' : null}
 
-        <Notifications />
+        {isAdmin || isMember ? <Notifications /> : null}
       </div>
     )
   }
 }
 
 App.propTypes = {
-  currentUser: PropTypes.object
+  currentUser: PropTypes.object,
+  isAdmin: PropTypes.bool,
+  isMember: PropTypes.bool
 }
 
 export default createContainer(() => {
+  Meteor.subscribe('users')
   const currentUser = Meteor.user()
   return {
     currentUser,
-    isAdmin: Roles.userIsInRole(currentUser, ROLES.admin)
+    isAdmin: Roles.userIsInRole(currentUser, ROLES.admin),
+    isMember: Roles.userIsInRole(currentUser, ROLES.member)
   }
 }, App)

@@ -54,7 +54,7 @@ class App extends Component {
       <div className='notification-list-container'>
         <div className='container-fluid'>
           <div className='clearfix'>
-            <button type='button' className='btn btn-outline-info float-right' onClick={this.toggleAutoRefresh}>
+            <button className='btn btn-outline-info float-right' onClick={this.toggleAutoRefresh}>
               {autoRefresh.get() ? <FaPause /> : <FaPlay />}
               <span className='text'>
                 {autoRefresh.get() ? 'Deactivate auto-refresh' : 'Activate auto-refresh'}
@@ -80,6 +80,13 @@ class App extends Component {
                   ))}
                 </ReactCSSTransitionGroup>
               </InfiniteScroll>
+              <button className='list-end btn btn-outline-info w-75 d-block mx-auto'>
+                {notifications.length === 0 ? 'No notification to display.'
+                  : autoRefresh.get() && notifications.length === LIMIT
+                    ? `Pause auto-refresh to display more than ${LIMIT} notifications.`
+                  : hasMore ? 'Loading...'
+                  : 'At the end.'}
+              </button>
             </div>
           </div>
         </div>
