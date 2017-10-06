@@ -1,5 +1,5 @@
-/* global SimpleSchema */
 import {Mongo} from 'meteor/mongo'
+import SimpleSchema from 'simpl-schema'
 
 export const Notifications = new Mongo.Collection('notifications')
 
@@ -29,7 +29,10 @@ Notifications.schema = new SimpleSchema({
     type: String, optional: true
   },
   info: {
-    type: [String], optional: true
+    type: Array, optional: true
+  },
+  'info.$': {
+    type: String
   }
 })
 
