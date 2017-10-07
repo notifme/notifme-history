@@ -1,3 +1,4 @@
+/* global Roles */
 import {Meteor} from 'meteor/meteor'
 import {createContainer} from 'meteor/react-meteor-data'
 import {ReactiveVar} from 'meteor/reactive-var'
@@ -9,8 +10,9 @@ import FaPlay from 'react-icons/lib/fa/play'
 import InfiniteScroll from 'react-infinite-scroller'
 import nl2br from 'react-nl2br'
 
-import DateFromNow from './DateFromNow.jsx'
-import {Notifications} from '../../models/notification.js'
+import DateFromNow from '../components/DateFromNow.jsx'
+import {Notifications} from '../../models/notification'
+import {ROLES} from '../../models/user'
 
 const LIMIT = 300
 const LIMIT_STEP = 30
@@ -48,7 +50,8 @@ class App extends Component {
   }
 
   render () {
-    const {notifications, autoRefresh} = this.props
+    const {currentUser, isGuest, notifications, autoRefresh} = this.props
+    if (!currentUser || isGuest) return null
     const hasMore = notifications.length > 0 && notifications.length >= notificationLimit.get()
     return (
       <div className='notification-list-container'>
@@ -106,14 +109,18 @@ class App extends Component {
 App.propTypes = {
   notifications: PropTypes.array.isRequired,
   notificationLimit: PropTypes.object.isRequired,
-  autoRefresh: PropTypes.object.isRequired
+  autoRefresh: PropTypes.object.isRequired,
+  currentUser: PropTypes.object,
+  isGuest: PropTypes.bool.isRequired
 }
 
 const notificationLimit = new ReactiveVar(LIMIT_STEP)
 const autoRefresh = new ReactiveVar(true)
 
 export default createContainer(() => {
+  Meteor.subscribe('users')
   Meteor.subscribe('notifications')
+  const currentUser = Meteor.user()
   const notifications = Notifications.find({}, {
     sort: {datetime: -1},
     limit: notificationLimit.get(),
@@ -122,6 +129,8 @@ export default createContainer(() => {
   return {
     notifications,
     notificationLimit,
-    autoRefresh
+    autoRefresh,
+    currentUser,
+    isGuest: Roles.userIsInRole(currentUser, ROLES.guest)
   }
 }, App)

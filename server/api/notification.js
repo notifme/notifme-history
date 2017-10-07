@@ -2,9 +2,9 @@
 import {Meteor} from 'meteor/meteor'
 
 import * as Api from '.'
-import {Notifications} from '../../models/notification.js'
-import {NotificationDetails} from '../../models/notificationDetail.js'
-import {NotificationUsers} from '../../models/notificationUser.js'
+import {Notifications} from '../../models/notification'
+import {NotificationDetails} from '../../models/notificationDetail'
+import {NotificationUsers} from '../../models/notificationUser'
 import {ROLES} from '../../models/user'
 
 Meteor.publish('notifications', function () {
