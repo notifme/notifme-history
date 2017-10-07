@@ -6,6 +6,11 @@ html body {
   -webkit-font-smoothing: antialiased;
 }
 
+::selection {
+  background-color: #17a2b8;
+  color: #fff;
+}
+
 button {
   cursor: pointer;
   svg {

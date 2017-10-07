@@ -9,5 +9,7 @@ Meteor.startup(() => {
   render(<App />, document.getElementById('content'))
 })
 
-/* iron:router is used on server-side for the API, but requires client routes */
-;['/'].forEach((route) => Router.route(route, function () { this.render('EmptyTemplate') }))
+/* iron:router is used on server-side for the API */
+Router.configure({
+  noRoutesTemplate: 'EmptyTemplate'
+})
