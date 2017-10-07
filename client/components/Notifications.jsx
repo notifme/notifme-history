@@ -52,7 +52,7 @@ class App extends Component {
     const hasMore = notifications.length > 0 && notifications.length >= notificationLimit.get()
     return (
       <div className='notification-list-container'>
-        <div className='container-fluid'>
+        <div className='notification-list'>
           <div className='sticky-top clearfix'>
             <button className='btn btn-outline-info float-right' onClick={this.toggleAutoRefresh}>
               {autoRefresh.get() ? <FaPause /> : <FaPlay />}

@@ -1,0 +1,123 @@
+
+.navbar {
+
+  .navbar-brand img {
+    border: 1px solid #bbb;
+
+    &:hover {
+      border-color: #17a2b8;
+    }
+  }
+
+  .form-control:focus {
+    border-color: transparent;
+  }
+
+  .input-group-addon {
+    cursor: pointer;
+    background-clip: padding-box;
+  }
+
+  .navbar-toggler {
+    color: #fff;
+    border-color: #aaa;
+
+    &:hover {
+      border-color: #17a2b8;
+    }
+    &:focus {
+      border-color: #17a2b8;
+      outline: 3px auto #17a2b8;
+    }
+  }
+
+  #login-buttons .login-buttons-with-only-one-button .login-button {
+    background: #eee;
+    color: #434756;
+    font-weight: bold;
+    border-color: #17a2b8;
+  }
+}
+
+.menu {
+
+  a {
+    display: block;
+    color: #aaa;
+    font-weight: bold;
+    margin-bottom: 10px;
+
+    &:hover {
+      color: #17a2b8;
+      text-decoration: none;
+    }
+    svg {
+      font-size: 20px;
+      margin-top: -4px;
+      margin-right: 7px;
+    }
+  }
+
+  hr {
+    border-color: rgba(255, 255, 255, 0.3);
+  }
+
+  .user {
+    text-align: center;
+    margin-bottom: 10px;
+
+    img.picture {
+      margin-bottom: 8px;
+    }
+    .pending {
+      margin-top: 7px;
+      font-size: 14px;
+      font-style: italic;
+    }
+  }
+
+  /* Position and sizing of burger button */
+  .bm-burger-button {
+    position: relative;
+    width: 32px;
+    height: 28px;
+  }
+  /* Color/shape of burger icon bars */
+  .bm-burger-bars {
+    background: #ddd;
+    height: 15% !important;
+  }
+  .bm-burger-button:hover .bm-burger-bars {
+    background: #17a2b8;
+    opacity: 1 !important;
+  }
+  /* Position and sizing of clickable cross button */
+  .bm-cross-button {
+    height: 24px;
+    width: 24px;
+  }
+  /* Color/shape of close button cross */
+  .bm-cross {
+    background: #bdc3c7;
+  }
+  .bm-menu-wrap {
+    top: 0;
+  }
+  /* General sidebar styles */
+  .bm-menu {
+    background: #373a47;
+    padding: 2.5em 1.5em 0;
+    font-size: 1.15em;
+  }
+  /* Wrapper for item list */
+  .bm-item-list {
+    color: #b8b7ad;
+    padding: 0.8em;
+  }
+  /* Styling of overlay */
+  .bm-overlay {
+    background: rgba(0, 0, 0, 0.3);
+    top: 0;
+    left: 0;
+  }
+}

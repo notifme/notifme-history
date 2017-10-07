@@ -1,14 +1,14 @@
 /* Source: https://codepen.io/brady_wright/pen/NNOvrW */
 
 .notification-list-container {
-  $primary-color: #FF6B6B;
+  $primary-color: #ff6b6b;
   $primary-color-hover: scale-color($primary-color, $lightness: 32%);
 
   color: #768390;
   margin-top: 15px;
 
   h1, h2, h3, h4, h5, h6 {
-    color: #3D4351;
+    color: #3d4351;
     margin-top: 0;
   }
   a {
@@ -18,8 +18,9 @@
       text-decoration: none;
     }
   }
-  .container-fluid {
+  .notification-list {
     .sticky-top {
+      z-index: 10;
       top: 81px;
     }
     .row {
@@ -114,7 +115,7 @@
     &:after {
       content: "";
       width: 3px;
-      background: #CCD5DB;
+      background: #ccd5db;
       display: block;
       position: absolute;
       top: 24px; bottom: 0; left: 6px;
@@ -155,8 +156,8 @@
         top: 0;
         bottom: 30px;
         position: absolute;
-        border-top: 3px solid #CCD5DB;
-        border-bottom: 3px solid #CCD5DB;
+        border-top: 3px solid #ccd5db;
+        border-bottom: 3px solid #ccd5db;
       }
       &:after {
         content: "";
