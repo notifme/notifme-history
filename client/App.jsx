@@ -5,8 +5,9 @@ import PropTypes from 'prop-types'
 import React, {Component} from 'react'
 
 import Navbar from './components/Navbar.jsx'
-import Notifications from './pages/Notifications.jsx'
 import Page404 from './pages/404.jsx'
+import NotificationsPage from './pages/Notifications.jsx'
+import SearchPage from './pages/Search.jsx'
 import WelcomePage from './pages/Welcome.jsx'
 import {ROLES} from '../models/user'
 
@@ -18,7 +19,8 @@ class App extends Component {
       <div>
         <Navbar />
         {!currentUser || isGuest ? <WelcomePage />
-          : pathname === '/' ? <Notifications />
+          : pathname === '/' ? <NotificationsPage />
+          : pathname === '/search' ? <SearchPage />
           : <Page404 />}
       </div>
     )

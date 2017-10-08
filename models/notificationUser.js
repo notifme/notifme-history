@@ -10,6 +10,7 @@ if (Meteor.isServer) {
 
 export function setIndexes () {
   NotificationUsers._ensureIndex({id: 1})
+  NotificationUsers._ensureIndex({'$**': 'text'})
 }
 
 NotificationUsers.schema = new SimpleSchema({

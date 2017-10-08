@@ -2,32 +2,19 @@
 .navbar {
 
   .navbar-brand img {
-    border: 1px solid #bbb;
+    border: 2px solid #bbb;
 
     &:hover {
       border-color: #17a2b8;
     }
   }
 
-  .form-control:focus {
-    border-color: transparent;
-  }
-
-  .input-group-addon {
-    cursor: pointer;
-    background-clip: padding-box;
-  }
-
-  .navbar-toggler {
-    color: #fff;
-    border-color: #aaa;
+  a.search {
+    color: #bbb;
+    font-size: 26px;
 
     &:hover {
-      border-color: #17a2b8;
-    }
-    &:focus {
-      border-color: #17a2b8;
-      outline: 3px auto #17a2b8;
+      color: #17a2b8;
     }
   }
 
