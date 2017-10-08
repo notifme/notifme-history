@@ -14,13 +14,14 @@ import {ROLES} from '../models/user'
 
 class App extends Component {
   render () {
-    const {currentUser, isGuest} = this.props
+    const {isLoading, currentUser, isGuest} = this.props
     const pathname = typeof window !== 'undefined' ? window.location.pathname : '/'
     const [, page, argument] = pathname.split('/')
     return (
       <div>
         <Navbar />
-        {!currentUser || isGuest ? <WelcomePage />
+        {isLoading ? null
+          : !currentUser || isGuest ? <WelcomePage />
           : pathname === '/' ? <NotificationsPage />
           : pathname === '/search' ? <SearchPage />
           : page === 'conversation' ? <ConversationPage userId={argument} />
@@ -31,6 +32,7 @@ class App extends Component {
 }
 
 App.propTypes = {
+  isLoading: PropTypes.bool.isRequired,
   currentUser: PropTypes.object,
   isGuest: PropTypes.bool.isRequired
 }
@@ -39,6 +41,7 @@ export default createContainer(() => {
   Meteor.subscribe('users')
   const currentUser = Meteor.user()
   return {
+    isLoading: Meteor.status().status === 'connecting',
     currentUser,
     isGuest: Roles.userIsInRole(currentUser, ROLES.guest)
   }
