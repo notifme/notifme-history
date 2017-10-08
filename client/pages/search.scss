@@ -18,6 +18,13 @@
     .user-info {
       margin-bottom: 8px;
 
+      a {
+        color: inherit;
+        &:hover {
+          text-decoration: none;
+          color: #17a2b8;
+        }
+      }
       code {
         margin-right: 5px;
         margin-left: 20px;

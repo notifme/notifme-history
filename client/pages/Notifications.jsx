@@ -66,9 +66,9 @@ class NotificationPage extends Component {
               <InfiniteScroll loadMore={this.increaseLimit} hasMore={hasMore}>
                 <ReactCSSTransitionGroup component='ul' className='timeline timeline-centered'
                   transitionName='fade' transitionEnterTimeout={400} transitionLeaveTimeout={200}>
-                  {notifications.map(({_id, datetime, channel, title, text, info}) => (
+                  {notifications.map(({_id, datetime, channel, title, text, info, userId}) => (
                     <li key={_id} className='timeline-item left'>
-                      <div className='timeline-info'>
+                      <a className='timeline-info' href={userId ? `/conversation/${userId}` : null}>
                         <div className='datetime'>
                           <DateFromNow date={datetime.toISOString()} />
                         </div>
@@ -78,7 +78,7 @@ class NotificationPage extends Component {
                           ))}
                           <span className='channel badge badge-pill badge-info'>{channel}</span>
                         </div>
-                      </div>
+                      </a>
                       <div className='timeline-marker' />
                       <div className='timeline-content'>
                         <h3 className='timeline-title'>{title}</h3>

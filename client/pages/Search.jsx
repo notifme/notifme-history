@@ -63,8 +63,10 @@ class SearchPage extends Component {
         {users.map((user) => (
           <div key={user._id} className='user-info'>
             <hr />
-            {Object.keys(user).filter((key) => !['_id', 'score'].includes(key))
-              .map((key) => this.renderUserInfo(key, user[key], searchWords))}
+            <a href={`/conversation/${user.id}`}>
+              {Object.keys(user).filter((key) => !['_id', 'score'].includes(key))
+                .map((key) => this.renderUserInfo(key, user[key], searchWords))}
+            </a>
           </div>
         ))}
         {users.length ? <hr /> : null}
