@@ -76,7 +76,7 @@ class SearchPage extends Component {
 
   render () {
     return (
-      <div className='search-page-container container'>
+      <div className='search-page container'>
         <div className='row'>
           <div className='col' />
           <div className='col-xs-12 col-md-6'>

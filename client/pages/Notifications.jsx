@@ -51,7 +51,7 @@ class NotificationPage extends Component {
     const {notifications, autoRefresh} = this.props
     const hasMore = notifications.length > 0 && notifications.length >= notificationLimit.get()
     return (
-      <div className='notification-list-container container'>
+      <div className='notification-page container'>
         <div className='notification-list'>
           <div className='sticky-top clearfix'>
             <button className='btn btn-outline-info float-right' onClick={this.toggleAutoRefresh}>
