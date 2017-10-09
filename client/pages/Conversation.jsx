@@ -60,7 +60,7 @@ class ConversationPage extends Component {
       ? notifications.filter(({channel}) => channel === selectedChannel)
       : notifications
     return (
-      <div className='conversation-page notification-page container'>
+      <div className='conversation-page notifications-page container'>
         <div className='row'>
           <div className='col' />
           <div className='col-md-8 col-lg-6 mt-3 mb-4'>

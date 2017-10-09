@@ -13,7 +13,7 @@ import {Notifications} from '../../models/notification'
 const LIMIT = 300
 const LIMIT_STEP = 30
 
-class NotificationPage extends Component {
+class NotificationsPage extends Component {
   constructor (props) {
     super(props)
     this.toggleAutoRefresh = this.toggleAutoRefresh.bind(this)
@@ -49,7 +49,7 @@ class NotificationPage extends Component {
     const {notifications, autoRefresh} = this.props
     const hasMore = notifications.length > 0 && notifications.length >= notificationLimit.get()
     return (
-      <div className='notification-page container'>
+      <div className='notifications-page container'>
         <div className='notification-list'>
           <div className='sticky-top clearfix'>
             <button className='btn btn-outline-info float-right' onClick={this.toggleAutoRefresh}>
@@ -79,7 +79,7 @@ class NotificationPage extends Component {
   }
 }
 
-NotificationPage.propTypes = {
+NotificationsPage.propTypes = {
   notifications: PropTypes.array.isRequired,
   notificationLimit: PropTypes.object.isRequired,
   autoRefresh: PropTypes.object.isRequired
@@ -100,4 +100,4 @@ export default createContainer(() => {
     notificationLimit,
     autoRefresh
   }
-}, NotificationPage)
+}, NotificationsPage)
