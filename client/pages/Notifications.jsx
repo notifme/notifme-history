@@ -7,7 +7,7 @@ import FaPause from 'react-icons/lib/fa/pause'
 import FaPlay from 'react-icons/lib/fa/play'
 import InfiniteScroll from 'react-infinite-scroller'
 
-import NotificationList from '../components/NotificationList.jsx'
+import NotificationList from '../components/NotificationList'
 import {Notifications} from '../../models/notification'
 
 const LIMIT = 300

@@ -10,7 +10,7 @@ import FaKey from 'react-icons/lib/fa/key'
 import FaSearch from 'react-icons/lib/fa/search'
 import FaUsers from 'react-icons/lib/fa/user'
 
-import AccountsUIWrapper from './AccountsUIWrapper.jsx'
+import AccountsUIWrapper from './AccountsUIWrapper'
 import {ROLES} from '../../models/user'
 
 class Navbar extends Component {

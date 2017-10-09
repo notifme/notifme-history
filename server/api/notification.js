@@ -13,7 +13,21 @@ Meteor.publish('notifications', function () {
     : this.stop()
 })
 
-Meteor.publish('notifications.user', function (userId) {
+Meteor.publish('notifications.getWithDetail', function (searchBy, id) {
+  if (Roles.userIsInRole(this.userId, [ROLES.member, ROLES.admin])) {
+    const notification = Notifications.findOne({[searchBy === 'id' ? 'id' : '_id']: id}, {sort: {datetime: -1}})
+    if (notification) {
+      return [
+        Notifications.find(notification._id),
+        NotificationUsers.find({id: notification.userId}),
+        NotificationDetails.find({notificationId: notification._id})
+      ]
+    }
+  }
+  return this.stop()
+})
+
+Meteor.publish('notifications.findByUser', function (userId) {
   return Roles.userIsInRole(this.userId, [ROLES.member, ROLES.admin])
     ? Notifications.find({userId}, {sort: {datetime: -1}})
     : this.stop()

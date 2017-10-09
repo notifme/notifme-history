@@ -4,19 +4,20 @@ import {createContainer} from 'meteor/react-meteor-data'
 import PropTypes from 'prop-types'
 import React, {Component} from 'react'
 
-import Navbar from './components/Navbar.jsx'
-import Page404 from './pages/404.jsx'
-import ConversationPage from './pages/Conversation.jsx'
-import NotificationsPage from './pages/Notifications.jsx'
-import SearchPage from './pages/Search.jsx'
-import WelcomePage from './pages/Welcome.jsx'
+import Navbar from './components/Navbar'
+import Page404 from './pages/404'
+import ConversationPage from './pages/Conversation'
+import NotificationPage from './pages/Notification'
+import NotificationsPage from './pages/Notifications'
+import SearchPage from './pages/Search'
+import WelcomePage from './pages/Welcome'
 import {ROLES} from '../models/user'
 
 class App extends Component {
   render () {
     const {isLoading, currentUser, isGuest} = this.props
     const pathname = typeof window !== 'undefined' ? window.location.pathname : '/'
-    const [, page, argument] = pathname.split('/')
+    const [, page, arg1, arg2] = pathname.split('/')
     return (
       <div>
         <Navbar />
@@ -24,7 +25,8 @@ class App extends Component {
           : !currentUser || isGuest ? <WelcomePage />
           : pathname === '/' ? <NotificationsPage />
           : pathname === '/search' ? <SearchPage />
-          : page === 'conversation' ? <ConversationPage userId={argument} />
+          : page === 'conversation' ? <ConversationPage userId={arg1} />
+          : page === 'notification' ? <NotificationPage id={arg2} searchBy={arg1} />
           : <Page404 />}
       </div>
     )

@@ -5,7 +5,7 @@ import PropTypes from 'prop-types'
 import React, {Component} from 'react'
 import FaSearch from 'react-icons/lib/fa/search'
 
-import UserInfo from '../components/UserInfo'
+import JsonInfo from '../components/JsonInfo'
 import {NotificationUsers} from '../../models/notificationUser'
 
 class SearchPage extends Component {
@@ -40,7 +40,7 @@ class SearchPage extends Component {
             <hr />
             <a href={`/conversation/${user.id}`}>
               {Object.keys(user).filter((key) => !['_id', 'score'].includes(key)).map((key) =>
-                <UserInfo {...{key, keyName: key, value: user[key], searchWords}} />)}
+                <JsonInfo {...{key, keyName: key, value: user[key], searchWords}} />)}
             </a>
           </div>
         ))}
