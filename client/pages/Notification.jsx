@@ -4,13 +4,38 @@ import PropTypes from 'prop-types'
 import React, {Component} from 'react'
 
 import NotificationList from '../components/NotificationList'
+import ReadableJson from '../components/ReadableJson'
 import UserCard from '../components/UserCard'
-import JsonInfo from '../components/JsonInfo'
 import {Notifications} from '../../models/notification'
 import {NotificationDetails} from '../../models/notificationDetail'
 import {NotificationUsers} from '../../models/notificationUser'
 
 class NotificationPage extends Component {
+  renderUser (user) {
+    return (
+      <div className='row'>
+        <div className='col' />
+        <div className='col-md-8 col-lg-6 mt-3 mb-4'>
+          <UserCard userId={user.id} user={user} />
+        </div>
+        <div className='col' />
+      </div>
+    )
+  }
+
+  renderDetails ({_id, notificationId, ...details}) {
+    return (
+      <div className='notification-details-card card'>
+        <div className='card-body'>
+          <h4 className='card-title'>Notification #{details.id || notificationId}</h4>
+          <p className='card-text'>
+            <ReadableJson object={details} />
+          </p>
+        </div>
+      </div>
+    )
+  }
+
   render () {
     const {notification, details, user} = this.props
     if (!notification) return null
@@ -19,26 +44,8 @@ class NotificationPage extends Component {
         <div className='notification-list'>
           <NotificationList notifications={[notification]} />
         </div>
-        {user ? (
-          <div className='row'>
-            <div className='col' />
-            <div className='col-md-8 col-lg-6 mt-3 mb-4'>
-              <UserCard userId={user.id} user={user} />
-            </div>
-            <div className='col' />
-          </div>
-        ) : null}
-        {details ? (
-          <div className='notification-details-card card'>
-            <div className='card-body'>
-              <h4 className='card-title'>Notification #{details.id || details.notificationId}</h4>
-              <p className='card-text'>
-                {Object.keys(details).filter((key) => !['_id', 'notificationId'].includes(key))
-                  .map((key) => <JsonInfo key={key} keyName={key} value={details[key]} />)}
-              </p>
-            </div>
-          </div>
-        ) : null}
+        {user ? this.renderUser(user) : null}
+        {details ? this.renderDetails(details) : null}
       </div>
     )
   }

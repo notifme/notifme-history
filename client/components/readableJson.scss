@@ -1,10 +1,26 @@
 
-.card .json-info {
+.json-info {
+  color: #768390;
+
+  mark {
+    background-color: rgba(23, 162, 184, 0.7);
+    color: #fff;
+  }
+}
+
+.multiline-json .json-info {
   display: block;
   margin-top: 5px;
   color: #5f6b77;
 
   code {
     margin-right: 5px;
+  }
+}
+
+.inline-json .json-info {
+  code {
+    margin-right: 5px;
+    margin-left: 20px;
   }
 }

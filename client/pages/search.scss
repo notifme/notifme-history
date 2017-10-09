@@ -6,10 +6,6 @@
   .users {
     margin-top: 7%;
 
-    mark {
-      background-color: rgba(23, 162, 184, 0.7);
-      color: #fff;
-    }
     @media (min-width: 992px) {
       hr {
         width: 42%;
@@ -24,10 +20,6 @@
           text-decoration: none;
           color: #17a2b8;
         }
-      }
-      code {
-        margin-right: 5px;
-        margin-left: 20px;
       }
     }
   }

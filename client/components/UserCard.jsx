@@ -1,9 +1,13 @@
 import PropTypes from 'prop-types'
 import React, {Component} from 'react'
 
-import JsonInfo from './JsonInfo'
+import ReadableJson from './ReadableJson'
 
 export default class UserCard extends Component {
+  renderUser ({_id, score, ...user}) {
+    return <ReadableJson object={user} />
+  }
+
   render () {
     const {userId, user} = this.props
     return (
@@ -11,10 +15,7 @@ export default class UserCard extends Component {
         <div className='card-body'>
           <h4 className='card-title'>User #{userId}</h4>
           <p className='card-text'>
-            {user
-              ? Object.keys(user).filter((key) => !['_id', 'score'].includes(key)).map((key) =>
-                <JsonInfo key={key} keyName={key} value={user[key]} />)
-              : `Loading information...`}
+            {user ? this.renderUser(user) : `Loading information...`}
           </p>
         </div>
       </div>
