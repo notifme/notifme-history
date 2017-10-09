@@ -1,5 +1,6 @@
 /* global Roles */
 import {Meteor} from 'meteor/meteor'
+import SimpleSchema from 'simpl-schema'
 
 import * as Api from '.'
 import {Notifications} from '../../models/notification'
@@ -54,6 +55,21 @@ Api.post('/api/notification', async (request) => {
       await NotificationDetails.insert(details)
     }
     return {id: notificationId}
+  } catch (error) {
+    Api.throwFormError(error)
+  }
+})
+
+Api.post('/api/notification/event', async (request) => {
+  try {
+    const {notificationId, ...event} = request.body
+    if (event.datetime) event.datetime = new Date(event.datetime)
+
+    new SimpleSchema({notificationId: String}).validate({notificationId}, {ignore: ['keyNotInSchema']})
+    Notifications.eventSchema.validate(event, {ignore: ['keyNotInSchema']})
+
+    await Notifications.update({id: notificationId}, {$push: {events: event}})
+    return true
   } catch (error) {
     Api.throwFormError(error)
   }

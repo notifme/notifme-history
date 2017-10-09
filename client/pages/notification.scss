@@ -2,7 +2,8 @@
 .notification-page {
   margin-top: 40px;
 
-  .notification-details-card {
-    margin-top: 3%;
+  .notification-details-card,
+  .notification-events-card {
+    margin-top: 20px;
   }
 }

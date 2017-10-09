@@ -3,6 +3,7 @@ import {createContainer} from 'meteor/react-meteor-data'
 import PropTypes from 'prop-types'
 import React, {Component} from 'react'
 
+import DateFromNow from '../components/DateFromNow'
 import NotificationList from '../components/NotificationList'
 import ReadableJson from '../components/ReadableJson'
 import UserCard from '../components/UserCard'
@@ -12,13 +13,29 @@ import {NotificationUsers} from '../../models/notificationUser'
 
 class NotificationPage extends Component {
   renderUser (user) {
+    return <UserCard userId={user.id} user={user} />
+  }
+
+  renderEvents (events) {
+    if (events.length < 1) return null
     return (
-      <div className='row'>
-        <div className='col' />
-        <div className='col-md-8 col-lg-6 mt-3 mb-4'>
-          <UserCard userId={user.id} user={user} />
+      <div className='notification-events-card card'>
+        <div className='card-body'>
+          <h4 className='card-title'>Events</h4>
+          <div className='card-text'>
+            <table className='table'>
+              <tbody>
+                {events.map(({type, datetime, info}, i) =>
+                  <tr key={`${type}-${i}`}>
+                    <td><code>{type}</code></td>
+                    <td>{<DateFromNow date={datetime.toISOString()} />}</td>
+                    <td>{info}</td>
+                  </tr>
+                )}
+              </tbody>
+            </table>
+          </div>
         </div>
-        <div className='col' />
       </div>
     )
   }
@@ -27,7 +44,7 @@ class NotificationPage extends Component {
     return (
       <div className='notification-details-card card'>
         <div className='card-body'>
-          <h4 className='card-title'>Notification #{details.id || notificationId}</h4>
+          <h4 className='card-title'>Details</h4>
           <p className='card-text'>
             <ReadableJson object={details} />
           </p>
@@ -44,8 +61,11 @@ class NotificationPage extends Component {
         <div className='notification-list'>
           <NotificationList notifications={[notification]} />
         </div>
-        {user ? this.renderUser(user) : null}
-        {details ? this.renderDetails(details) : null}
+        <div className='container-fluid'>
+          {user ? this.renderUser(user) : null}
+          {notification && notification.events ? this.renderEvents(notification.events) : null}
+          {details ? this.renderDetails(details) : null}
+        </div>
       </div>
     )
   }

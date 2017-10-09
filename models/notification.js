@@ -19,6 +19,19 @@ export function setIndexes () {
   Notifications._ensureIndex({userId: 1})
 }
 
+Notifications.eventSchema = new SimpleSchema({
+  type: {
+    type: String
+  },
+  datetime: {
+    type: Date
+  },
+  info: {
+    type: String, optional: true
+  }
+  // every other field is ignored
+})
+
 Notifications.schema = new SimpleSchema({
   id: {
     type: String, optional: true
@@ -46,6 +59,12 @@ Notifications.schema = new SimpleSchema({
   },
   isFromUser: {
     type: Boolean, optional: true
+  },
+  events: {
+    type: Array, optional: true
+  },
+  'events.$': {
+    type: Notifications.eventSchema
   },
   expireAt: {
     type: Date, optional: true

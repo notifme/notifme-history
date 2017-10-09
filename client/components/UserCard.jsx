@@ -13,7 +13,9 @@ export default class UserCard extends Component {
     return (
       <div className='user-card card'>
         <div className='card-body'>
-          <h4 className='card-title'>User #{userId}</h4>
+          <h4 className='card-title'>
+            <a className='no-link' href={`/conversation/${userId}`}>User #{userId}</a>
+          </h4>
           <p className='card-text'>
             {user ? this.renderUser(user) : `Loading information...`}
           </p>
