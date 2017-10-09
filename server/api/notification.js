@@ -13,6 +13,12 @@ Meteor.publish('notifications', function () {
     : this.stop()
 })
 
+Meteor.publish('notifications.user', function (userId) {
+  return Roles.userIsInRole(this.userId, [ROLES.member, ROLES.admin])
+    ? Notifications.find({userId}, {sort: {datetime: -1}})
+    : this.stop()
+})
+
 Api.post('/api/notification', async (request) => {
   try {
     const {user, details, ...notification} = request.body

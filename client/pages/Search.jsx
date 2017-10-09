@@ -4,8 +4,8 @@ import {ReactiveVar} from 'meteor/reactive-var'
 import PropTypes from 'prop-types'
 import React, {Component} from 'react'
 import FaSearch from 'react-icons/lib/fa/search'
-import Highlighter from 'react-highlight-words'
 
+import UserInfo from '../components/UserInfo'
 import {NotificationUsers} from '../../models/notificationUser'
 
 class SearchPage extends Component {
@@ -30,31 +30,6 @@ class SearchPage extends Component {
     )
   }
 
-  renderUserInfo (key, value, searchWords, prefix) {
-    const prefixedKey = [...(prefix ? [prefix] : []), key].join('.')
-    switch (typeof value) {
-      case 'string':
-      case 'number':
-        return (
-          <span key={prefixedKey}>
-            <code className='key'>{prefixedKey}:</code>
-            <Highlighter searchWords={searchWords} textToHighlight={value} />
-          </span>
-        )
-
-      case 'object':
-        if (Array.isArray(value)) {
-          return this.renderUserInfo(key, `[${value.join(', ')}]`, searchWords, prefix)
-        } else {
-          return Object.keys(value).map((subKey) =>
-            this.renderUserInfo(subKey, value[subKey], searchWords, prefixedKey))
-        }
-
-      default:
-        return null
-    }
-  }
-
   renderUsers () {
     const {users, searchInput} = this.props
     const searchWords = searchInput.get().split(/ |-/)
@@ -64,8 +39,8 @@ class SearchPage extends Component {
           <div key={user._id} className='user-info'>
             <hr />
             <a href={`/conversation/${user.id}`}>
-              {Object.keys(user).filter((key) => !['_id', 'score'].includes(key))
-                .map((key) => this.renderUserInfo(key, user[key], searchWords))}
+              {Object.keys(user).filter((key) => !['_id', 'score'].includes(key)).map((key) =>
+                <UserInfo {...{key, keyName: key, value: user[key], searchWords}} />)}
             </a>
           </div>
         ))}

@@ -3,13 +3,11 @@ import {createContainer} from 'meteor/react-meteor-data'
 import {ReactiveVar} from 'meteor/reactive-var'
 import PropTypes from 'prop-types'
 import React, {Component} from 'react'
-import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
 import FaPause from 'react-icons/lib/fa/pause'
 import FaPlay from 'react-icons/lib/fa/play'
 import InfiniteScroll from 'react-infinite-scroller'
-import nl2br from 'react-nl2br'
 
-import DateFromNow from '../components/DateFromNow.jsx'
+import NotificationList from '../components/NotificationList.jsx'
 import {Notifications} from '../../models/notification'
 
 const LIMIT = 300
@@ -64,29 +62,7 @@ class NotificationPage extends Component {
           <div className='row'>
             <div className='col-12'>
               <InfiniteScroll loadMore={this.increaseLimit} hasMore={hasMore}>
-                <ReactCSSTransitionGroup component='ul' className='timeline timeline-centered'
-                  transitionName='fade' transitionEnterTimeout={400} transitionLeaveTimeout={200}>
-                  {notifications.map(({_id, datetime, channel, title, text, info, userId}) => (
-                    <li key={_id} className='timeline-item left'>
-                      <a className='timeline-info' href={userId ? `/conversation/${userId}` : null}>
-                        <div className='datetime'>
-                          <DateFromNow date={datetime.toISOString()} />
-                        </div>
-                        <div>
-                          {(info || []).map((infoChunk, i) => (
-                            <span key={i} className='badge badge-pill badge-secondary'>{infoChunk}</span>
-                          ))}
-                          <span className='channel badge badge-pill badge-info'>{channel}</span>
-                        </div>
-                      </a>
-                      <div className='timeline-marker' />
-                      <div className='timeline-content'>
-                        <h3 className='timeline-title'>{title}</h3>
-                        <p>{nl2br(text)}</p>
-                      </div>
-                    </li>
-                  ))}
-                </ReactCSSTransitionGroup>
+                <NotificationList notifications={notifications} />
               </InfiniteScroll>
               <button className='list-end btn btn-outline-info w-75 d-block mx-auto'>
                 {notifications.length === 0 ? 'No notification to display.'

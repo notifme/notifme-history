@@ -47,7 +47,7 @@ Notifications.schema = new SimpleSchema({
   expireAt: {
     type: Date, optional: true
   }
-  // every other field is not saved
+  // every other field is ignored
 })
 
 Notifications.attachSchema(Notifications.schema)
