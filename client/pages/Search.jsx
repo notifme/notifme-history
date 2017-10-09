@@ -38,7 +38,7 @@ class SearchPage extends Component {
         {users.map(({_id, score, ...user}) => (
           <div key={_id} className='user-info'>
             <hr />
-            <a href={`/conversation/${user.id}`}>
+            <a className='no-link' href={`/conversation/${user.id}`}>
               <ReadableJson object={user} inline searchWords={searchWords} />
             </a>
           </div>

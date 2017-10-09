@@ -44,6 +44,9 @@ Notifications.schema = new SimpleSchema({
   'info.$': {
     type: String
   },
+  isFromUser: {
+    type: Boolean, optional: true
+  },
   expireAt: {
     type: Date, optional: true
   }

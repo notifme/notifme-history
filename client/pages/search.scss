@@ -1,3 +1,4 @@
+@import '../variables';
 
 .search-page {
   margin-top: 40px;
@@ -14,12 +15,8 @@
     .user-info {
       margin-bottom: 8px;
 
-      a {
-        color: inherit;
-        &:hover {
-          text-decoration: none;
-          color: #17a2b8;
-        }
+      a:hover {
+        color: $primary-color;
       }
     }
   }

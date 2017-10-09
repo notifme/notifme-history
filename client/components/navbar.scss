@@ -1,28 +1,28 @@
+@import '../variables';
 
 .navbar {
 
   .navbar-brand img {
     border: 2px solid #bbb;
-
     &:hover {
-      border-color: #17a2b8;
+      border-color: $primary-color;
     }
+  }
+
+  a:hover {
+    color: $primary-color !important;
   }
 
   a.search {
     color: #bbb;
     font-size: 26px;
-
-    &:hover {
-      color: #17a2b8;
-    }
   }
 
   #login-buttons .login-buttons-with-only-one-button .login-button {
     background: #eee;
     color: #434756;
     font-weight: bold;
-    border-color: #17a2b8;
+    border-color: $primary-color;
   }
 }
 
@@ -33,11 +33,6 @@
     color: #aaa;
     font-weight: bold;
     margin-bottom: 10px;
-
-    &:hover {
-      color: #17a2b8;
-      text-decoration: none;
-    }
     svg {
       font-size: 20px;
       margin-top: -4px;
@@ -75,7 +70,7 @@
     height: 15% !important;
   }
   .bm-burger-button:hover .bm-burger-bars {
-    background: #17a2b8;
+    background: $primary-color;
     opacity: 1 !important;
   }
   /* Position and sizing of clickable cross button */

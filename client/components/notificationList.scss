@@ -1,7 +1,6 @@
 /* Source: https://codepen.io/brady_wright/pen/NNOvrW */
 
-$primary-color: #ff6b6b;
-$primary-color-hover: scale-color($primary-color, $lightness: 32%);
+@import '../variables';
 
 .notification-list {
   color: #768390;
@@ -9,13 +8,6 @@ $primary-color-hover: scale-color($primary-color, $lightness: 32%);
   h1, h2, h3, h4, h5, h6 {
     color: #3d4351;
     margin-top: 0;
-  }
-  a {
-    color: $primary-color;
-    &:hover {
-      color: $primary-color-hover;
-      text-decoration: none;
-    }
   }
   .row {
     padding: 0 0 4em 0;
@@ -64,7 +56,6 @@ $primary-color-hover: scale-color($primary-color, $lightness: 32%);
   /*----- TIMELINE INFO -----*/
 
   .timeline-info {
-    color: inherit;
     margin: 0 0 .5em 0;
     .datetime {
       font-size: 11px;
@@ -73,9 +64,6 @@ $primary-color-hover: scale-color($primary-color, $lightness: 32%);
     }
     .channel {
       text-transform: capitalize;
-    }
-    &:hover {
-      color: inherit;
     }
     @media (min-width: 992px) {
       .datetime {
@@ -98,7 +86,7 @@ $primary-color-hover: scale-color($primary-color, $lightness: 32%);
     top: 0; bottom: 0; left: 0;
     width: 15px;
     &:before {
-      background: $primary-color;
+      background: $secondary-color;
       border: 3px solid transparent;
       border-radius: 100%;
       content: "";
@@ -121,21 +109,24 @@ $primary-color-hover: scale-color($primary-color, $lightness: 32%);
       content: none;
     }
   }
-  .timeline-item:not(.period):hover .timeline-marker:before {
+  .right .timeline-marker:before {
+    background: $answer-color;
+  }
+  .timeline-item.left:not(.period):hover .timeline-marker:before {
     background: transparent;
-    border: 3px solid $primary-color;
+    border: 3px solid $secondary-color;
+  }
+  .timeline-item.right:not(.period):hover .timeline-marker:before {
+    background: transparent;
+    border: 3px solid $answer-color;
   }
 
   /*----- TIMELINE CONTENT -----*/
 
   .timeline-content {
     padding-bottom: 40px;
-    color: inherit;
     p:last-child {
       margin-bottom: 0;
-    }
-    &:hover {
-      color: inherit;
     }
   }
 
@@ -284,14 +275,23 @@ $primary-color-hover: scale-color($primary-color, $lightness: 32%);
   ----------------------------------------------*/
 
   .marker-outline {
-    .timeline-marker {
+    .left .timeline-marker {
       &:before {
         background: transparent;
-        border-color: $primary-color;
+        border-color: $secondary-color;
       }
     }
-    .timeline-item:hover .timeline-marker:before {
-      background: $primary-color;
+    .left.timeline-item:hover .timeline-marker:before {
+      background: $secondary-color;
+    }
+    .right .timeline-marker {
+      &:before {
+        background: transparent;
+        border-color: $answer-color;
+      }
+    }
+    .right.timeline-item:hover .timeline-marker:before {
+      background: $answer-color;
     }
   }
 }

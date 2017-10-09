@@ -39,10 +39,10 @@ class Navbar extends Component {
     return (
       <nav className='navbar sticky-top navbar-dark bg-dark'>
         <div className='container'>
-          <a className='navbar-brand' href='/'>
+          <a className='navbar-brand no-link' href='/'>
             <img src='/img/logo.svg' className='rounded p-1' width='42' height='42' alt='Logo' />
           </a>
-          {currentUser ? <a className='search' href='/search'><FaSearch /></a> : null}
+          {currentUser ? <a className='search no-link' href='/search'><FaSearch /></a> : null}
           {currentUser ? this.renderMenu() : <AccountsUIWrapper />}
         </div>
       </nav>
