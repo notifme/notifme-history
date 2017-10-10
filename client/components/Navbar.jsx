@@ -1,6 +1,3 @@
-/* global Roles */
-import {Meteor} from 'meteor/meteor'
-import {createContainer} from 'meteor/react-meteor-data'
 import PropTypes from 'prop-types'
 import React, {Component} from 'react'
 import {slide as Menu} from 'react-burger-menu'
@@ -11,9 +8,8 @@ import FaSearch from 'react-icons/lib/fa/search'
 import FaUsers from 'react-icons/lib/fa/user'
 
 import AccountsUIWrapper from './AccountsUIWrapper'
-import {ROLES} from '../../models/user'
 
-class Navbar extends Component {
+export default class Navbar extends Component {
   renderMenu () {
     const {currentUser, isGuest} = this.props
     return (
@@ -55,13 +51,3 @@ Navbar.propTypes = {
   isAdmin: PropTypes.bool,
   isGuest: PropTypes.bool
 }
-
-export default createContainer(() => {
-  Meteor.subscribe('users')
-  const currentUser = Meteor.user()
-  return {
-    currentUser,
-    isAdmin: Roles.userIsInRole(currentUser, ROLES.admin),
-    isGuest: Roles.userIsInRole(currentUser, ROLES.guest)
-  }
-}, Navbar)
