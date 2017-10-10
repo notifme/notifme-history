@@ -25,7 +25,7 @@ class App extends Component {
         <Navbar {...{currentUser, isGuest, isAdmin}} />
         {isLoading ? null
           : !currentUser || isGuest ? <WelcomePage />
-          : pathname === '/' ? <NotificationsPage />
+          : pathname === '/' ? <NotificationsPage {...{currentUser, isAdmin}} />
           : pathname === '/search' ? <SearchPage />
           : page === 'conversation' ? <ConversationPage userId={arg1} />
           : page === 'notification' ? <NotificationPage id={arg2} searchBy={arg1} />
