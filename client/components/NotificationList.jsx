@@ -25,7 +25,7 @@ export default class NotificationList extends Component {
             <div className='timeline-info'>
               <a className='no-link' href={userId ? `/conversation/${userId}` : null}>
                 <div className='datetime'>
-                  <DateFromNow date={datetime.toISOString()} />
+                  <DateFromNow date={datetime} />
                 </div>
                 <div>
                   {(info || []).map((infoChunk, i) => (

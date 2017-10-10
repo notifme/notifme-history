@@ -28,7 +28,7 @@ class NotificationPage extends Component {
                 {events.map(({type, datetime, info}, i) =>
                   <tr key={`${type}-${i}`}>
                     <td><code>{type}</code></td>
-                    <td>{<DateFromNow date={datetime.toISOString()} />}</td>
+                    <td>{<DateFromNow date={datetime} />}</td>
                     <td>{info}</td>
                   </tr>
                 )}
@@ -41,6 +41,7 @@ class NotificationPage extends Component {
   }
 
   renderDetails ({_id, notificationId, ...details}) {
+    // TODO v2: try to display details in a better way given the notification type
     return (
       <div className='notification-details-card card mt-3'>
         <div className='card-body'>

@@ -26,7 +26,14 @@ Accounts.onCreateUser((options, user) => {
   user.roles = [userCount === 0 ? ROLES.admin : ROLES.guest]
   if (user.roles[0] === ROLES.admin) {
     const token = crypto.randomBytes(16).toString('hex')
-    ApiKeys.insert({token, scopes: [SCOPES.write], createdAt: new Date(), byUser: user._id})
+    ApiKeys.insert({
+      token,
+      scopes: [SCOPES.write],
+      createdAt: new Date(),
+      byUser: {id: user._id, name: user.profile.name}
+    })
+  } else {
+    // TODO v2: notify admin(s)
   }
   Roles.addUsersToRoles(user._id, user.roles, Roles.GLOBAL_GROUP)
   return user

@@ -11,7 +11,7 @@ import AccountsUIWrapper from './AccountsUIWrapper'
 
 export default class Navbar extends Component {
   renderMenu () {
-    const {currentUser, isGuest} = this.props
+    const {currentUser, isGuest, isAdmin} = this.props
     return (
       <div className='menu'>
         <Menu right>
@@ -25,6 +25,19 @@ export default class Navbar extends Component {
               <div className='pending'>(pending validation)</div>
             ) : null}
           </div>
+          {isGuest ? null : (
+            <div>
+              <hr />
+              <a className='menu-item no-link' href='/'><FaHome /> Home</a>
+              <a className='menu-item no-link' href='/search'><FaSearch /> Search</a>
+            </div>
+          )}
+          {isAdmin ? (
+            <div>
+              <hr />
+              <a className='menu-item no-link' href='/api-keys'><FaKey /> API keys</a>
+            </div>
+          ) : null}
         </Menu>
       </div>
     )

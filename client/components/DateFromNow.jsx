@@ -33,9 +33,10 @@ export default class DateFromNow extends React.Component {
   render () {
     const {date} = this.props
     const {mounted} = this.state
+    const dateString = typeof date === 'string' ? date : date.toISOString()
     return (
-      <span title={dateFormat(date, 'D MMMM YYYY HH:mm:ss')}>
-        {mounted ? `${this.calendar(date)} (${this.fromNow(date)})` : date}
+      <span title={dateFormat(dateString, 'D MMMM YYYY HH:mm:ss')}>
+        {mounted ? `${this.calendar(dateString)} (${this.fromNow(dateString)})` : dateString}
       </span>
     )
   }
