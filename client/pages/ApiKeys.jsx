@@ -13,7 +13,7 @@ class ApiKeysPage extends Component {
     const {apiKeys} = this.props
     return (
       <div className='apikeys-page container mt-5'>
-        <table className='table'>
+        <table className='table table-responsive'>
           <thead>
             <tr>
               <th>Token</th>

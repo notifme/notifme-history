@@ -51,7 +51,7 @@ class ManageUsersPage extends Component {
     const {currentUser, users} = this.props
     return (
       <div className='apikeys-page container mt-5'>
-        <table className='table'>
+        <table className='table table-responsive'>
           <thead>
             <tr>
               <th />

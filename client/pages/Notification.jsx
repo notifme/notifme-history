@@ -23,7 +23,7 @@ class NotificationPage extends Component {
         <div className='card-body'>
           <h4 className='card-title'>Events</h4>
           <div className='card-text'>
-            <table className='table'>
+            <table className='table table-responsive'>
               <tbody>
                 {events.map(({type, datetime, info}, i) =>
                   <tr key={`${type}-${i}`}>
