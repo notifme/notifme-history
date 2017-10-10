@@ -39,6 +39,9 @@ Api.post('/api/notification', async (request) => {
     const {user, details, ...notification} = request.body
     if (notification.datetime) notification.datetime = new Date(notification.datetime)
     if (notification.expireAt) notification.expireAt = new Date(notification.expireAt)
+    if (notification.events) {
+      notification.events = notification.events.map((event) => ({...event, datetime: new Date(event.datetime)}))
+    }
 
     if (user) NotificationUsers.schema.validate(user, {ignore: ['keyNotInSchema']})
     if (details) NotificationDetails.schema.validate(details, {ignore: ['keyNotInSchema']})

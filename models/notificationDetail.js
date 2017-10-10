@@ -41,7 +41,6 @@ export function setIndexes () {
   NotificationDetails._ensureIndex({notificationId: 1})
 }
 
-
 NotificationDetails.schema = new SimpleSchema({
   id: { // filled automatically
     type: String, optional: true
