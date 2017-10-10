@@ -32,6 +32,7 @@ export default class DateFromNow extends React.Component {
 
   render () {
     const {date} = this.props
+    if (date === null) return null
     const {mounted} = this.state
     const dateString = typeof date === 'string' ? date : date.toISOString()
     return (

@@ -8,6 +8,7 @@ import Navbar from './components/Navbar'
 import Page404 from './pages/404'
 import ApiKeysPage from './pages/ApiKeys'
 import ConversationPage from './pages/Conversation'
+import ManageUsersPage from './pages/ManageUsers'
 import NotificationPage from './pages/Notification'
 import NotificationsPage from './pages/Notifications'
 import SearchPage from './pages/Search'
@@ -28,6 +29,7 @@ class App extends Component {
           : pathname === '/search' ? <SearchPage />
           : page === 'conversation' ? <ConversationPage userId={arg1} />
           : page === 'notification' ? <NotificationPage id={arg2} searchBy={arg1} />
+          : page === 'manage-users' ? <ManageUsersPage />
           : page === 'api-keys' ? <ApiKeysPage />
           : <Page404 />}
       </div>
