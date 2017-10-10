@@ -19,7 +19,7 @@ class NotificationPage extends Component {
   renderEvents (events) {
     if (events.length < 1) return null
     return (
-      <div className='notification-events-card card'>
+      <div className='notification-events-card card mt-3'>
         <div className='card-body'>
           <h4 className='card-title'>Events</h4>
           <div className='card-text'>
@@ -42,7 +42,7 @@ class NotificationPage extends Component {
 
   renderDetails ({_id, notificationId, ...details}) {
     return (
-      <div className='notification-details-card card'>
+      <div className='notification-details-card card mt-3'>
         <div className='card-body'>
           <h4 className='card-title'>Details</h4>
           <p className='card-text'>
@@ -57,7 +57,7 @@ class NotificationPage extends Component {
     const {notification, details, user} = this.props
     if (!notification) return null
     return (
-      <div className='notification-page container'>
+      <div className='notification-page container mt-5'>
         <div className='notification-list'>
           <NotificationList notifications={[notification]} />
         </div>
