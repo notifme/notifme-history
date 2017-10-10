@@ -29,7 +29,7 @@ class App extends Component {
           : pathname === '/search' ? <SearchPage />
           : page === 'conversation' ? <ConversationPage userId={arg1} />
           : page === 'notification' ? <NotificationPage id={arg2} searchBy={arg1} />
-          : page === 'manage-users' ? <ManageUsersPage />
+          : page === 'manage-users' ? <ManageUsersPage currentUser={currentUser} />
           : page === 'api-keys' ? <ApiKeysPage />
           : <Page404 />}
       </div>

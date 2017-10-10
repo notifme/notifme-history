@@ -7,8 +7,48 @@ import DateFromNow from '../components/DateFromNow'
 import {ROLES} from '../../models/user'
 
 class ManageUsersPage extends Component {
+  constructor (props) {
+    super(props)
+    this.state = {
+      changeRoleUser: null
+    }
+    this.displayRoleForm = this.displayRoleForm.bind(this)
+    this.updateRole = this.updateRole.bind(this)
+  }
+
+  displayRoleForm (event) {
+    const {userid} = event.target.dataset
+    this.setState({changeRoleUser: userid})
+  }
+
+  updateRole (event) {
+    const {dataset: {userid}, value} = event.target
+    Meteor.call('user.setRole', userid, value)
+    this.setState({changeRoleUser: null})
+  }
+
+  renderChangeRoleAction (userId, userRole) {
+    const {changeRoleUser} = this.state
+    return changeRoleUser === userId ? (
+      <div className='form-group' style={{marginBottom: 0}}>
+        <select multiple className='form-control' defaultValue={[userRole]}
+          size={Object.keys(ROLES).length} style={{overflow: 'auto'}}>
+          {Object.keys(ROLES).map((role) =>
+            <option key={role} value={role} data-userid={userId} onClick={this.updateRole}>
+              {role}
+            </option>
+          )}
+        </select>
+      </div>
+    ) : (
+      <button className='btn btn-outline-info' data-userid={userId} onClick={this.displayRoleForm}>
+        Change user role
+      </button>
+    )
+  }
+
   render () {
-    const {users} = this.props
+    const {currentUser, users} = this.props
     return (
       <div className='apikeys-page container mt-5'>
         <table className='table'>
@@ -19,6 +59,7 @@ class ManageUsersPage extends Component {
               <th>Email</th>
               <th>Role</th>
               <th>Created</th>
+              <th />
             </tr>
           </thead>
           <tbody>
@@ -31,6 +72,7 @@ class ManageUsersPage extends Component {
                   <td>{email}</td>
                   <td><code>{role}</code></td>
                   <td><DateFromNow date={createdAt} /></td>
+                  <td>{currentUser._id === _id ? null : this.renderChangeRoleAction(_id, role)}</td>
                 </tr>
             )}
           </tbody>
@@ -41,6 +83,7 @@ class ManageUsersPage extends Component {
 }
 
 ManageUsersPage.propTypes = {
+  currentUser: PropTypes.object,
   users: PropTypes.array.isRequired
 }
 

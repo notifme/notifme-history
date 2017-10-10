@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types'
 import React, {Component} from 'react'
 import {slide as Menu} from 'react-burger-menu'
-import FaAreaChart from 'react-icons/lib/fa/area-chart'
+// import FaAreaChart from 'react-icons/lib/fa/area-chart'
 import FaHome from 'react-icons/lib/fa/home'
 import FaKey from 'react-icons/lib/fa/key'
 import FaSearch from 'react-icons/lib/fa/search'
@@ -30,11 +30,13 @@ export default class Navbar extends Component {
               <hr />
               <a className='menu-item no-link' href='/'><FaHome /> Home</a>
               <a className='menu-item no-link' href='/search'><FaSearch /> Search</a>
+              {/* TODO v2: <a className='menu-item no-link' href='/statistics'><FaAreaChart /> Statistics</a> */}
             </div>
           )}
           {isAdmin ? (
             <div>
               <hr />
+              <a className='menu-item no-link' href='/manage-users'><FaUsers /> Manage users</a>
               <a className='menu-item no-link' href='/api-keys'><FaKey /> API keys</a>
             </div>
           ) : null}

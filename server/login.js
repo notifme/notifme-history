@@ -35,6 +35,6 @@ Accounts.onCreateUser((options, user) => {
   } else {
     // TODO v2: notify admin(s)
   }
-  Roles.addUsersToRoles(user._id, user.roles, Roles.GLOBAL_GROUP)
+  Roles.setUserRoles(user._id, user.roles)
   return user
 })
