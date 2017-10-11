@@ -1,6 +1,10 @@
 {
   "name": "notifme-history",
   "version": "0.0.1",
+  "description": "A pretty history of the conversations with your users",
+  "repository": "https://github.com/notifme/notifme-history",
+  "author": "Notif.me",
+  "license": "MIT",
   "scripts": {
     "clean": "rm -rf .meteor/local",
     "lint": "standard",

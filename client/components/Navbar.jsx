@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types'
 import React, {Component} from 'react'
 import {slide as Menu} from 'react-burger-menu'
+import FaBook from 'react-icons/lib/fa/book'
 // import FaAreaChart from 'react-icons/lib/fa/area-chart'
 import FaHome from 'react-icons/lib/fa/home'
 import FaKey from 'react-icons/lib/fa/key'
@@ -30,6 +31,9 @@ export default class Navbar extends Component {
               <hr />
               <a className='menu-item no-link' href='/'><FaHome /> Home</a>
               <a className='menu-item no-link' href='/search'><FaSearch /> Search</a>
+              <a className='menu-item no-link' href='https://github.com/notifme/notifme-history' target='_blank'>
+                <FaBook /> Documentation
+              </a>
               {/* TODO v2: <a className='menu-item no-link' href='/statistics'><FaAreaChart /> Statistics</a> */}
             </div>
           )}
