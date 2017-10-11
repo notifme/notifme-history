@@ -20,13 +20,11 @@ a.no-link {
   }
 }
 
-button {
+button, a.btn {
   cursor: pointer;
-  svg {
-    margin-top: -3px;
-    & + .text { margin-left: 7px; }
-    .text + & { margin-right: 7px; }
-  }
+  svg { margin-top: -3px; }
+  svg + .text { margin-left: 7px; }
+  .text + svg { margin-left: 7px; }
 }
 
 table.table td {

@@ -3,6 +3,7 @@ import {createContainer} from 'meteor/react-meteor-data'
 import {ReactiveVar} from 'meteor/reactive-var'
 import PropTypes from 'prop-types'
 import React, {Component} from 'react'
+import FaExternalLink from 'react-icons/lib/fa/external-link'
 import FaPause from 'react-icons/lib/fa/pause'
 import FaPlay from 'react-icons/lib/fa/play'
 import InfiniteScroll from 'react-infinite-scroller'
@@ -85,6 +86,22 @@ class NotificationsPage extends Component {
     )
   }
 
+  renderCongratulations () {
+    return (
+      <div className='border border-info rounded mt-5 w-75 p-4 mx-auto'
+        style={{textAlign: 'left', backgroundColor: '#fafafa', color: '#666'}}>
+        <h5 className='mb-3'>Congratulations!</h5>
+        <p>Next step now is to call this API each time you send a message to a user!</p>
+        <div className='clearfix'>
+          <a className='btn btn-info float-right'
+            href='https://github.com/notifme/notifme-history#how-to-use' target='_blank'>
+            <span className='text'>See documentation</span> <FaExternalLink />
+          </a>
+        </div>
+      </div>
+    )
+  }
+
   render () {
     const {notifications, autoRefresh} = this.props
     const hasMore = notifications.length > 0 && notifications.length >= notificationLimit.get()
@@ -114,6 +131,7 @@ class NotificationsPage extends Component {
                   </button>
                 </span>
               )}
+              {notifications.length === 1 ? this.renderCongratulations() : null}
             </div>
           </div>
         </div>
