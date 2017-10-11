@@ -11,7 +11,7 @@ import AccountsUIWrapper from './AccountsUIWrapper'
 
 export default class Navbar extends Component {
   renderMenu () {
-    const {currentUser, isGuest, isAdmin} = this.props
+    const {version, currentUser, isGuest, isAdmin} = this.props
     return (
       <div className='menu'>
         <Menu right>
@@ -40,6 +40,9 @@ export default class Navbar extends Component {
               <a className='menu-item no-link' href='/api-keys'><FaKey /> API keys</a>
             </div>
           ) : null}
+          <div className='text-center mt-5' style={{fontSize: 16}}>
+            <em>Version {version}</em>
+          </div>
         </Menu>
       </div>
     )
@@ -62,6 +65,7 @@ export default class Navbar extends Component {
 }
 
 Navbar.propTypes = {
+  version: PropTypes.string,
   currentUser: PropTypes.object,
   isAdmin: PropTypes.bool,
   isGuest: PropTypes.bool

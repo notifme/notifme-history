@@ -1,7 +1,8 @@
 {
   "name": "notifme-history",
-  "private": true,
+  "version": "0.0.1",
   "scripts": {
+    "clean": "rm -rf .meteor/local",
     "lint": "standard",
     "start": "env $(cat .env | xargs) meteor run"
   },

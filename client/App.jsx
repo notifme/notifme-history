@@ -17,12 +17,12 @@ import {ROLES} from '../models/user'
 
 class App extends Component {
   render () {
-    const {isLoading, currentUser, isGuest, isAdmin} = this.props
+    const {version, isLoading, currentUser, isGuest, isAdmin} = this.props
     const pathname = typeof window !== 'undefined' ? window.location.pathname : '/'
     const [, page, arg1, arg2] = pathname.split('/')
     return (
       <div>
-        <Navbar {...{currentUser, isGuest, isAdmin}} />
+        <Navbar {...{version, currentUser, isGuest, isAdmin}} />
         {isLoading ? null
           : !currentUser || isGuest ? <WelcomePage />
           : pathname === '/' ? <NotificationsPage {...{currentUser, isAdmin}} />
@@ -38,6 +38,7 @@ class App extends Component {
 }
 
 App.propTypes = {
+  version: PropTypes.string,
   isLoading: PropTypes.bool.isRequired,
   currentUser: PropTypes.object,
   isGuest: PropTypes.bool.isRequired,
