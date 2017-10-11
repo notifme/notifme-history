@@ -16,6 +16,10 @@
 
 - [Features](#features)
 - [Getting started](#getting-started)
+- [How to use](#how-to-use)
+  - [1. Model](#1-model)
+  - [2. API](#2-api)
+  - [3. Options](#3-options)
 - [Contributing](#contributing)
 - [Need help? Found a bug?](#need-help-found-a-bug)
 
@@ -35,6 +39,7 @@
 
 * **MIT license** — Use it like you want.
 
+<br>
 <p align="center">
   <img alt="Preview" src="https://notifme.github.io/notifme-history/img/preview.gif" />
 </p>
@@ -47,7 +52,45 @@ $ docker run -d -p 80:3000 --name notifme-history notifme/history:dev-latest
 
 :sparkles: Then open http://localhost in your favorite browser.
 
-> You will need an OAuth client ID from Google (the steps to create one will be detailed in the application).
+> You will need an OAuth client ID and secret from Google (the steps to create one will be detailed in the application).
+
+> notifme/history:dev-* images are not suited for production use. They include MongoDB and if you delete the container all the data is lost.
+
+## How to use
+
+- [1. Model](#1-model)
+- [2. API](#2-api)
+- [3. Options](#3-options)
+
+### 1. Model
+
+Data is distributed into 3 main tables: `Notifications`, `NotificationDetails`, and `NotificationUsers`.
+
+| Table | Use |
+| --- | --- |
+| `Notifications` | This is the only table with an imposed model. Data corresponds with the notification list view and is intended to be a summary of the content (`datetime`, `channel`, `title`, `text`, `tags`...) to be kept longer than all the details.<br><br>You choose how long to keep each notification by setting an expiration date. |
+| `NotificationDetails` | This is where you can store all the (possibly lengthy) details of your notifications. You can use the model you want.<br><br>The table can be capped to a given size in MB so you don't exceed your quota. |
+| `NotificationUsers` | This table is used for the search feature. All field are indexes, so you should keep this data simple. The only required field is `id`.<br><br>You choose how long to keep each user by setting an expiration date, or it will expire when the last notification associated expires. |
+
+### 2. API
+
+#### POST /api/notification
+
+#### POST /api/notification/event
+
+### 3. Options
+
+| Name | Description |
+| --- | --- |
+| `NOTIFICATION_DETAILS_LIMIT_MB` | Optional. Capping in MB for the `NotificationDetails` table. Changing this value on a non-empty table is possible, but the operation will [require a global write lock](https://docs.mongodb.com/manual/core/capped-collections/#convert-a-collection-to-capped) and block all other operations until it has completed. |
+| `GOOGLE_CONSUMER_KEY` | Required (but not necessarily at startup). OAuth client ID from Google.  |
+| `GOOGLE_CONSUMER_SECRET` | Required (but not necessarily at startup). OAuth secret from Google. |
+
+You can pass them when you run docker:
+
+```shell
+$ docker run -d -e NOTIFICATION_DETAILS_LIMIT_MB=256 ...
+```
 
 ## Contributing
 
