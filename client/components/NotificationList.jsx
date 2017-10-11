@@ -20,7 +20,7 @@ export default class NotificationList extends Component {
     return (
       <ReactCSSTransitionGroup component='ul' className='timeline timeline-centered marker-outline'
         transitionName='fade' transitionEnterTimeout={400} transitionLeaveTimeout={200}>
-        {notifications.map(({_id, id, datetime, channel, title, text, info, userId, events, isFromUser}) => (
+        {notifications.map(({_id, id, datetime, channel, title, text, tags, userId, events, isFromUser}) => (
           <li key={_id} className={`timeline-item ${isFromUser ? 'right' : 'left'}`}>
             <div className='timeline-info'>
               <a className='no-link' href={userId ? `/conversation/${userId}` : null}>
@@ -28,8 +28,8 @@ export default class NotificationList extends Component {
                   <DateFromNow date={datetime} />
                 </div>
                 <div>
-                  {(info || []).map((infoChunk, i) => (
-                    <span key={i} className='badge badge-pill badge-secondary'>{infoChunk}</span>
+                  {(tags || []).map((tag, i) => (
+                    <span key={i} className='badge badge-pill badge-secondary'>{tag}</span>
                   ))}
                   <span className='channel badge badge-pill badge-info' title={this.getEventsString(events)}>
                     {channel}

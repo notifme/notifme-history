@@ -54,7 +54,7 @@ class NotificationsPage extends Component {
       channel: 'email',
       datetime: new Date().toISOString(),
       text: 'Hello!\n\nCongratulations, this is your first notification.',
-      info: [name],
+      tags: [name],
       user: {id: 'user-test-1', name, email: 'demo@example.com', phone: '+15000000000'},
       details: {subject: 'Test email!', html: '<h1>Hello!</h1>Congratulations, this is your first notification.'},
       events: [{type: 'sent', datetime: new Date().toISOString()}]

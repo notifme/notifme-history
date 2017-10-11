@@ -51,10 +51,10 @@ Notifications.schema = new SimpleSchema({
   text: {
     type: String, optional: true
   },
-  info: {
+  tags: {
     type: Array, optional: true
   },
-  'info.$': {
+  'tags.$': {
     type: String
   },
   isFromUser: {
