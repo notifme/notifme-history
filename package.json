@@ -6,7 +6,9 @@
   "author": "Notif.me",
   "license": "MIT",
   "scripts": {
+    "build:docker-dev": "bash ./scripts/docker-build-dev.sh",
     "clean": "rm -rf .meteor/local",
+    "deploy:docker-dev": "bash ./scripts/docker-deploy-dev.sh",
     "lint": "standard",
     "start": "env $(cat .env | xargs) meteor run"
   },

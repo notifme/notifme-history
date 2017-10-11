@@ -15,6 +15,7 @@
 </p>
 
 - [Features](#features)
+- [Getting started](#getting-started)
 - [Contributing](#contributing)
 - [Need help? Found a bug?](#need-help-found-a-bug)
 
@@ -37,6 +38,16 @@
 <p align="center">
   <img alt="Preview" src="https://notifme.github.io/notifme-history/img/preview.gif" />
 </p>
+
+## Getting Started
+
+```shell
+$ docker run -d -p 80:3000 --name notifme-history notifme/history:dev-latest
+```
+
+:sparkles: Then open http://localhost in your favorite browser.
+
+> You will need an OAuth client ID from Google (the steps to create one will be detailed in the application).
 
 ## Contributing
 
