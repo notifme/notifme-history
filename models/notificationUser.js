@@ -5,7 +5,12 @@ import SimpleSchema from 'simpl-schema'
 export const NotificationUsers = new Mongo.Collection('notificationusers')
 
 if (Meteor.isServer) {
+  setTTL()
   setIndexes()
+}
+
+export function setTTL () {
+  NotificationUsers._ensureIndex({expireAt: 1}, {expireAfterSeconds: 0})
 }
 
 export function setIndexes () {
@@ -16,6 +21,9 @@ export function setIndexes () {
 NotificationUsers.schema = new SimpleSchema({
   id: {
     type: String
+  },
+  expireAt: {
+    type: Date, optional: true
   }
   // every other field is accepted
 })
