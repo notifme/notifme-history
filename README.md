@@ -20,6 +20,8 @@
   - [1. Model](#1-model)
   - [2. API](#2-api)
   - [3. Options](#3-options)
+    - [POST /api/notification](#post-apinotification)
+    - [POST /api/notification/event](#post-apinotificationevent)
 - [Contributing](#contributing)
 - [Need help? Found a bug?](#need-help-found-a-bug)
 
@@ -61,6 +63,8 @@ $ docker run -d -p 80:3000 --name notifme-history notifme/history:dev-latest
 - [1. Model](#1-model)
 - [2. API](#2-api)
 - [3. Options](#3-options)
+  - [POST /api/notification](#post-apinotification)
+  - [POST /api/notification/event](#post-apinotificationevent)
 
 ### 1. Model
 
@@ -76,7 +80,64 @@ Data is distributed into 3 main tables: `Notifications`, `NotificationDetails`, 
 
 #### POST /api/notification
 
+| Field | Required | Type | Description |
+| --- | --- | --- | --- |
+| `id` | `false` | `String` | The external identifier of the notification. Required if you want to add events later on. |
+| `channel` | `true` | `String` | Type of the notification, you can put any string you want (`email`, `sms`, `push`, `webpush`, `slack`...). |
+| `datetime` | `true` | `Date` | Datetime ISO format. |
+| `title` | `true` | `String` | Notification's title. |
+| `text` | `false` | `String` | Notification's text content or summary. |
+| `tags` | `false` | `String[]` | Visual tags associated with the notification. |
+| `user` | `false` | `Object` | User information (for search feature). Only one field is required: `id`. The rest is up to you (but beware of the search index size, keep your data simple). |
+| `details` | `false` | `Object` | Any detail you want to keep. |
+| `events` | `false` | `Object[]` | Initial events. Fields: `type` (String, required), `datetime` (Date, required), `info` (String, optional). |
+| `isFromUser` | `false` | `boolean` | If the message comes from a user. |
+| `expireAt` | `false` | `Date` | Time until when to keep the notification (ISO format). |
+
+##### Minimal example:
+
+```shell
+curl -X POST http://localhost:3000/api/notification/event \
+  -H 'authorization: ...' \
+  -H 'content-type: application/json' \
+  -d '{ "title": "Minimal notification", "channel": "sms", "datetime": "2019-12-24 12:00:00" }'
+```
+
+##### Complete example:
+
+```shell
+curl -X POST http://localhost:3000/api/notification/event \
+  -H 'authorization: ...' \
+  -H 'content-type: application/json' \
+  -d '{ "id": "notification-1", "title": "Complete notification", "channel": "email", "datetime": "2019-12-24 12:00:00", "text": "Hello!", "tags": [ "John Doe" ], "user": { "id": "user-1", "name": "John Doe", "email": "john@example.com", "phone": "+15000000000" }, "details": { "subject": "Test email!", "html": "<h1>Hello!</h1>" }, "events": [ { "type": "sent", "datetime": "2019-12-24 12:00:00" } ], "expireAt": "2024-12-24 12:00:00" }'
+```
+
+##### User answer example:
+
+```shell
+curl -X POST http://localhost:3000/api/notification/event \
+-H 'authorization: ...' \
+-H 'content-type: application/json' \
+-d '{ "title": "Re: Minimal notification", "channel": "sms", "datetime": "2019-12-25 12:00:00", "isFromUser": true, "text": "this is my answer" }'
+```
+
 #### POST /api/notification/event
+
+| Field | Required | Type | Description |
+| --- | --- | --- | --- |
+| `notificationId` | `true` | `String` | The external identifier of the notification. |
+| `type` | `true` | `String` | Type of your event, you can put any string you want (`sent`, `delivered`, `errored`...). |
+| `datetime` | `true` | `Date` | Datetime ISO format. |
+| `info` | `false` | `String` | Any information you want to keep about this event. |
+
+##### Example:
+
+```shell
+curl -X POST http://localhost:3000/api/notification/event \
+  -H 'authorization: ...' \
+  -H 'content-type: application/json' \
+  -d '{ "notificationId": "notification-1", "type": "delivered", "datetime": "2019-12-24 12:00:00" }'
+```
 
 ### 3. Options
 
