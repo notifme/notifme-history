@@ -1,5 +1,5 @@
 <p align="center">
-  <img alt="Notif.me" src="https://notifme.github.io/notifme-history/img/logo.png" />
+  <img alt="Notif.me History" src="https://notifme.github.io/notifme-history/img/logo.png" />
 </p>
 
 <p align="center">
@@ -20,20 +20,22 @@
 
 ## Features
 
-* **Pretty history** — conversations, events...
+* **Pretty history** — Display all the conversations with your users, along with events associated with the notifications (no more "Did user X received the Y SMS?" from the client service team).
 
-* **Configure data retention** — ...
+* **Configure data retention** — Decide until when each notification must be kept and set a capping on your MongoDB database.
 
-* **Auto-refresh** — ...
+* **Auto-refresh** — The displayed notifications are automatically refreshed when they change or when new ones are created (with the help of [Meteor](https://www.meteor.com/)).
 
-* **Search by user info** — ...
+* **Search by user info** — All user fields are indexed and you can make complex searches [with negations and phrases](https://docs.mongodb.com/manual/reference/operator/query/text/#search-field).
 
-* **User management** — ...
+* **User management** — An administrator can easily give or revoke access to any user.
+
+* **Simple API** — The model of the extra data (users, notification details) you send to the API is up to you.
 
 * **MIT license** — Use it like you want.
 
 <p align="center">
-  <img alt="Notif.me" src="https://notifme.github.io/notifme-history/img/preview.gif" />
+  <img alt="Preview" src="https://notifme.github.io/notifme-history/img/preview.gif" />
 </p>
 
 ## Contributing
