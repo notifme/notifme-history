@@ -32,6 +32,10 @@
 
 * **MIT license** — Use it like you want.
 
+<p align="center">
+  <img alt="Notif.me" src="https://notifme.github.io/notifme-history/img/preview.gif" />
+</p>
+
 ## Contributing
 
 Contributions are very welcome!
