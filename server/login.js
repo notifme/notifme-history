@@ -11,7 +11,8 @@ if (process.env.GOOGLE_CONSUMER_KEY && process.env.GOOGLE_CONSUMER_SECRET) {
   }, {
     $set: {
       clientId: process.env.GOOGLE_CONSUMER_KEY,
-      secret: process.env.GOOGLE_CONSUMER_SECRET
+      secret: process.env.GOOGLE_CONSUMER_SECRET,
+      loginStyle: 'popup'
     }
   })
 }
