@@ -39,8 +39,8 @@ Api.post('/api/notification', async (request) => {
     const {user, details, ...notification} = request.body
     if (notification.datetime) notification.datetime = new Date(notification.datetime)
     if (notification.expireAt) notification.expireAt = new Date(notification.expireAt)
-    if (user.expireAt) user.expireAt = new Date(user.expireAt)
-    if (notification.expireAt && !user.expireAt) user.expireAt = new Date(notification.expireAt)
+    if (user && user.expireAt) user.expireAt = new Date(user.expireAt)
+    if (notification.expireAt && user && !user.expireAt) user.expireAt = new Date(notification.expireAt)
     if (notification.events) {
       notification.events = notification.events.map((event) => ({...event, datetime: new Date(event.datetime)}))
     }

@@ -38,6 +38,7 @@ async function handle (request, response, handler, scope) {
       response.statusCode = 200
       response.end(JSON.stringify(jsonResponse))
     } catch (error) {
+      console.error(error)
       response.statusCode = error.code || 500
       response.end(JSON.stringify({
         error: error.code ? error.message : 'An unexpected error occurred.',
