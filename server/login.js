@@ -24,7 +24,8 @@ Accounts.onCreateUser((options, user) => {
     picture: user.services.google.picture
   }
   const userCount = Meteor.users.find().count()
-  user.roles = [userCount === 0 ? ROLES.admin : ROLES.guest]
+  const isDemo = process.env.ROOT_URL === 'http://notifme-history-demo.now.sh' // XXX
+  user.roles = [userCount === 0 ? ROLES.admin : isDemo ? ROLES.member : ROLES.guest]
   if (user.roles[0] === ROLES.admin) {
     const token = crypto.randomBytes(16).toString('hex')
     ApiKeys.insert({
