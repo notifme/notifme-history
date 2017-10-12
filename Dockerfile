@@ -1,0 +1,1 @@
+FROM notifme/history:latest

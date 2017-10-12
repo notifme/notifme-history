@@ -1,0 +1,14 @@
+{
+  "type": "docker",
+  "engines": {
+    "node": "8.6.0"
+  },
+  "files": [
+    "Dockerfile"
+  ],
+  "env": [
+    "ROOT_URL",
+    "MONGO_URL",
+    "NOTIFICATION_DETAILS_LIMIT_MB"
+  ]
+}
