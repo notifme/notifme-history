@@ -68,6 +68,9 @@ Notifications.schema = new SimpleSchema({
   },
   expireAt: {
     type: Date, optional: true
+  },
+  createdAt: { // filled automatically
+    type: Date
   }
   // every other field is ignored
 })

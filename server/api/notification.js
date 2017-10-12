@@ -37,6 +37,7 @@ Meteor.publish('notifications.findByUser', function (userId) {
 Api.post('/api/notifications', async (request) => {
   try {
     const {user, details, ...notification} = request.body
+    notification.createdAt = new Date()
     if (notification.datetime) notification.datetime = new Date(notification.datetime)
     if (notification.expireAt) notification.expireAt = new Date(notification.expireAt)
     if (user && user.expireAt) user.expireAt = new Date(user.expireAt)
