@@ -2,7 +2,7 @@
 
 now notifme/notifme-history --public \
   --alias notifme-history-demo -f \
-  --env ROOT_URL=https://notifme-history-demo.now.sh/ \
+  --env ROOT_URL=https://notifme-history-demo.now.sh \
   --env MONGO_URL=@notifme-history-mongo-url \
   --env NOTIFICATION_DETAILS_LIMIT_MB=24
 

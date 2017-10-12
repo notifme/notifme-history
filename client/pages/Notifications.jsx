@@ -47,16 +47,21 @@ class NotificationsPage extends Component {
     this.pausedOnce = false
   }
 
-  renderCurlExample (apiKey, {profile: {name}}) {
-    const baseUrl = typeof window !== 'undefined' ? window.location.origin : ''
+  renderCurlExample (apiKey, {profile: {name}}, isDemo) {
+    const {baseUrl} = this.props
     const data = {
-      id: 'notification-test-1',
+      id: `notification-test-${Math.round(Math.random() * 1000)}`,
       title: 'Test email!',
       channel: 'email',
       datetime: new Date().toISOString(),
       text: 'Hello!\n\nCongratulations, this is your first notification.',
-      tags: [name],
-      user: {id: 'user-test-1', name, email: 'demo@example.com', phone: '+15000000000'},
+      tags: [isDemo ? 'John Doe' : name],
+      user: {
+        id: `user-test-${Math.round(Math.random() * 1000)}`,
+        name: isDemo ? 'John Doe' : name,
+        email: 'demo@example.com',
+        phone: `+15000${Math.round(Math.random() * 1000000)}`
+      },
       details: {subject: 'Test email!', html: '<h1>Hello!</h1>Congratulations, this is your first notification.'},
       events: [{type: 'sent', datetime: new Date().toISOString()}]
     }
@@ -66,7 +71,7 @@ class NotificationsPage extends Component {
         <h5 className='mb-3'>Send your first one!</h5>
         <code>
           curl -X POST {baseUrl}/api/notifications \<br />
-          &nbsp;&nbsp;-H 'authorization: {apiKey.token}' \<br />
+          &nbsp;&nbsp;-H 'authorization: {isDemo ? 'c9bcf2205623f866aad1de1620270293' : apiKey.token}' \<br />
           &nbsp;&nbsp;-H 'content-type: application/json' \<br />
           &nbsp;&nbsp;-d '{JSON.stringify(data, null, 1)}'
         </code>
@@ -75,13 +80,15 @@ class NotificationsPage extends Component {
   }
 
   renderEmptyList () {
-    const {isAdmin, apiKey, currentUser} = this.props
+    const {isAdmin, apiKey, currentUser, isDemo} = this.props
     return (
       <div className='text-center mt-5'>
         <h4>No notification to display yet...</h4>
         <img src='/img/empty.gif' alt='Nothing to display'
           className='w-75 mt-2' style={{maxWidth: '600px'}} />
-        {currentUser && isAdmin && apiKey ? this.renderCurlExample(apiKey, currentUser) : null}
+        {currentUser && ((isAdmin && apiKey) || isDemo)
+          ? this.renderCurlExample(apiKey, currentUser, isDemo)
+          : null}
       </div>
     )
   }
@@ -146,7 +153,9 @@ NotificationsPage.propTypes = {
   autoRefresh: PropTypes.object.isRequired,
   currentUser: PropTypes.object,
   isAdmin: PropTypes.bool,
-  apiKey: PropTypes.object
+  apiKey: PropTypes.object,
+  baseUrl: PropTypes.string,
+  isDemo: PropTypes.bool
 }
 
 const notificationLimit = new ReactiveVar(LIMIT_STEP)
@@ -164,10 +173,13 @@ export default createContainer(({isAdmin}) => {
     Meteor.subscribe('apikeys')
     apiKey = ApiKeys.findOne({scopes: {$in: [SCOPES.write]}})
   }
+  const baseUrl = typeof window !== 'undefined' ? window.location.origin : ''
   return {
     notifications,
     notificationLimit,
     autoRefresh,
-    apiKey
+    apiKey,
+    baseUrl,
+    isDemo: baseUrl === 'https://notifme-history-demo.now.sh' // XXX
   }
 }, NotificationsPage)
