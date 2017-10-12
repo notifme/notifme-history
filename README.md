@@ -165,7 +165,7 @@ To run in production, simply use the `notifme/history:latest` image.
 ```shell
 $ docker run -d \
   -e MONGO_URL=mongodb://<dbuser>:<dbpassword>@<url>:<port>/<dbname> \
-  -e ROOT_URL=http://example.com \
+  -e ROOT_URL=https://example.com \
   -e NOTIFICATION_DETAILS_LIMIT_MB=512 \
   -p 80:3000 --name notifme-history notifme/history:latest
 ```
@@ -175,7 +175,7 @@ $ docker run -d \
 - 1. Open an [mLab](https://mlab.com/) account (free tier with 500MB), create a database and a user for this database. You'll get an URL of the form `mongodb://<dbuser>:<dbpassword>@<url>:<port>/<dbname>`.
 
 - 2. Deploy it with [Now](https://zeit.co/now): `npm i -g now && now login && now --public notifme/notifme-history`.
-Use `http://notifme-history-[your-company].now.sh` as `ROOT_URL` and `128` for `NOTIFICATION_DETAILS_LIMIT_MB`.
+Use `https://notifme-history-[your-company].now.sh` as `ROOT_URL` and `128` for `NOTIFICATION_DETAILS_LIMIT_MB`.
 
 - 3. Alias you deployment: `now alias https://notifme-history-[your-company]-[xxxxxxxxxx].now.sh notifme-history-[your-company]` and scale id: `now scale notifme-history-[your-company].now.sh 1`
 
