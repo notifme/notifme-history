@@ -24,6 +24,7 @@
     - [POST /api/notification/event](#post-apinotificationevent)
 - [Contributing](#contributing)
 - [Need help? Found a bug?](#need-help-found-a-bug)
+- [Related Projects](#related-projects)
 
 ## Features
 
@@ -180,3 +181,13 @@ $ npm run lint
 
 [Submit an issue](https://github.com/notifme/notifme-history/issues) to the project Github if you need any help.
 And, of course, feel free to submit pull requests with bug fixes or changes.
+
+## Related Projects
+
+<p align="center">
+  <a href="https://github.com/notifme/notifme-sdk">
+    <img alt="Notif.me SDK" src="https://notifme.github.io/notifme-sdk/img/logo.png" />
+  </a>
+  <br>
+  <em>A Node.js library to send all kinds of transactional notifications.</em>
+</p>
