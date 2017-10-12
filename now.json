@@ -1,4 +1,5 @@
 {
+  "name": "notifme-history",
   "type": "docker",
   "engines": {
     "node": "8.6.0"

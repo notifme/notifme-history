@@ -22,6 +22,7 @@
     - [POST /api/notifications](#post-apinotifications)
     - [POST /api/notifications/:notificationId/events](#post-apinotificationsnotificationidevents)
   - [3. Options](#3-options)
+  - [4. In production](#4-in-production)
 - [Contributing](#contributing)
 - [Need help? Found a bug?](#need-help-found-a-bug)
 - [Related Projects](#related-projects)
@@ -49,6 +50,8 @@
 
 ## Getting Started
 
+You can find a *demo* [here](https://notifme-history-demo.now.sh/) or run it locally with docker:
+
 ```shell
 $ docker run -d -p 80:3000 --name notifme-history notifme/history:dev-latest
 ```
@@ -57,7 +60,7 @@ $ docker run -d -p 80:3000 --name notifme-history notifme/history:dev-latest
 
 > You will need an OAuth client ID and secret from Google (the steps to create one will be detailed in the application).
 
-> notifme/history:dev-* images are not suited for production use. They include MongoDB and if you delete the container all the data is lost.
+> notifme/history:dev-* images are not suited for production use. They include MongoDB and if you delete the container all the data is lost. [See 4. In production](#4-in-production)
 
 ## How to use
 
@@ -66,6 +69,7 @@ $ docker run -d -p 80:3000 --name notifme-history notifme/history:dev-latest
   - [POST /api/notifications](#post-apinotifications)
   - [POST /api/notifications/:notificationId/events](#post-apinotificationsnotificationidevents)
 - [3. Options](#3-options)
+- [4. In production](#4-in-production)
 
 ### 1. Model
 
@@ -153,6 +157,29 @@ You can pass them when you run docker:
 ```shell
 $ docker run -d -e NOTIFICATION_DETAILS_LIMIT_MB=256 ...
 ```
+
+### 4. In production
+
+To run in production, simply use the `notifme/history:latest` image.
+
+```shell
+$ docker run -d \
+  -e MONGO_URL=mongodb://<dbuser>:<dbpassword>@<url>:<port>/<dbname> \
+  -e ROOT_URL=http://example.com \
+  -e NOTIFICATION_DETAILS_LIMIT_MB=512 \
+  -p 80:3000 --name notifme-history notifme/history:latest
+```
+
+#### On a budget?
+
+- 1. Open an [mLab](https://mlab.com/) account (free tier with 500MB), create a database and a user for this database. You'll get an URL of the form `mongodb://<dbuser>:<dbpassword>@<url>:<port>/<dbname>`.
+
+- 2. Deploy it with [Now](https://zeit.co/now): `npm i -g now && now login && now --public notifme/notifme-history`.
+Use `http://notifme-history-[your-company].now.sh` as `ROOT_URL` and `128` for `NOTIFICATION_DETAILS_LIMIT_MB`.
+
+- 3. Alias you deployment: `now alias https://notifme-history-[your-company]-[xxxxxxxxxx].now.sh notifme-history-[your-company]` and scale id: `now scale notifme-history-[your-company].now.sh 1`
+
+And... there you go! :smiley_cat:
 
 ## Contributing
 
