@@ -65,7 +65,7 @@ class NotificationsPage extends Component {
         style={{textAlign: 'left', backgroundColor: '#fafafa'}}>
         <h5 className='mb-3'>Send your first one!</h5>
         <code>
-          curl -X POST {baseUrl}/api/notification \<br />
+          curl -X POST {baseUrl}/api/notifications \<br />
           &nbsp;&nbsp;-H 'authorization: {apiKey.token}' \<br />
           &nbsp;&nbsp;-H 'content-type: application/json' \<br />
           &nbsp;&nbsp;-d '{JSON.stringify(data, null, 1)}'

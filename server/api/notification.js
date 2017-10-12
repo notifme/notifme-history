@@ -34,7 +34,7 @@ Meteor.publish('notifications.findByUser', function (userId) {
     : this.stop()
 })
 
-Api.post('/api/notification', async (request) => {
+Api.post('/api/notifications', async (request) => {
   try {
     const {user, details, ...notification} = request.body
     if (notification.datetime) notification.datetime = new Date(notification.datetime)
@@ -65,12 +65,13 @@ Api.post('/api/notification', async (request) => {
   }
 })
 
-Api.post('/api/notification/event', async (request) => {
+Api.post('/api/notifications/:notificationId/events', async (request) => {
   try {
-    const {notificationId, ...event} = request.body
+    const {notificationId} = request.params
+    const event = request.body
     if (event.datetime) event.datetime = new Date(event.datetime)
 
-    new SimpleSchema({notificationId: String}).validate({notificationId}, {ignore: ['keyNotInSchema']})
+    new SimpleSchema({notificationId: String}).validate({notificationId})
     Notifications.eventSchema.validate(event, {ignore: ['keyNotInSchema']})
 
     await Notifications.update({id: notificationId}, {$push: {events: event}})

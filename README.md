@@ -19,8 +19,8 @@
 - [How to use](#how-to-use)
   - [1. Model](#1-model)
   - [2. API](#2-api)
-    - [POST /api/notification](#post-apinotification)
-    - [POST /api/notification/event](#post-apinotificationevent)
+    - [POST /api/notifications](#post-apinotifications)
+    - [POST /api/notifications/:notificationId/events](#post-apinotificationsnotificationidevents)
   - [3. Options](#3-options)
 - [Contributing](#contributing)
 - [Need help? Found a bug?](#need-help-found-a-bug)
@@ -63,8 +63,8 @@ $ docker run -d -p 80:3000 --name notifme-history notifme/history:dev-latest
 
 - [1. Model](#1-model)
 - [2. API](#2-api)
-  - [POST /api/notification](#post-apinotification)
-  - [POST /api/notification/event](#post-apinotificationevent)
+  - [POST /api/notifications](#post-apinotifications)
+  - [POST /api/notifications/:notificationId/events](#post-apinotificationsnotificationidevents)
 - [3. Options](#3-options)
 
 ### 1. Model
@@ -79,7 +79,7 @@ Data is distributed into 3 main tables: `Notifications`, `NotificationDetails`, 
 
 ### 2. API
 
-#### POST /api/notification
+#### POST /api/notifications
 
 | Field | Required | Type | Description |
 | --- | --- | --- | --- |
@@ -98,7 +98,7 @@ Data is distributed into 3 main tables: `Notifications`, `NotificationDetails`, 
 ##### Minimal example:
 
 ```shell
-curl -X POST http://localhost:3000/api/notification/event \
+curl -X POST http://localhost:3000/api/notifications \
   -H 'authorization: ...' \
   -H 'content-type: application/json' \
   -d '{ "title": "Minimal notification", "channel": "sms", "datetime": "2019-12-24 12:00:00" }'
@@ -107,7 +107,7 @@ curl -X POST http://localhost:3000/api/notification/event \
 ##### Complete example:
 
 ```shell
-curl -X POST http://localhost:3000/api/notification/event \
+curl -X POST http://localhost:3000/api/notifications \
   -H 'authorization: ...' \
   -H 'content-type: application/json' \
   -d '{ "id": "notification-1", "title": "Complete notification", "channel": "email", "datetime": "2019-12-24 12:00:00", "text": "Hello!", "tags": [ "John Doe" ], "user": { "id": "user-1", "name": "John Doe", "email": "john@example.com", "phone": "+15000000000" }, "details": { "subject": "Test email!", "html": "<h1>Hello!</h1>" }, "events": [ { "type": "sent", "datetime": "2019-12-24 12:00:00" } ], "expireAt": "2024-12-24 12:00:00" }'
@@ -116,17 +116,17 @@ curl -X POST http://localhost:3000/api/notification/event \
 ##### User answer example:
 
 ```shell
-curl -X POST http://localhost:3000/api/notification/event \
+curl -X POST http://localhost:3000/api/notifications \
 -H 'authorization: ...' \
 -H 'content-type: application/json' \
 -d '{ "title": "Re: Minimal notification", "channel": "sms", "datetime": "2019-12-25 12:00:00", "isFromUser": true, "text": "this is my answer" }'
 ```
 
-#### POST /api/notification/event
+#### POST /api/notifications/:notificationId/events
 
 | Field | Required | Type | Description |
 | --- | --- | --- | --- |
-| `notificationId` | `true` | `String` | The external identifier of the notification. |
+| `notificationId` | `true` | `String` | The external identifier of the notification.<br><em>(This parameter is part of the URL).</em> |
 | `type` | `true` | `String` | Type of your event, you can put any string you want (`sent`, `delivered`, `errored`...). |
 | `datetime` | `true` | `Date` | Datetime ISO format. |
 | `info` | `false` | `String` | Any information you want to keep about this event. |
@@ -134,10 +134,10 @@ curl -X POST http://localhost:3000/api/notification/event \
 ##### Example:
 
 ```shell
-curl -X POST http://localhost:3000/api/notification/event \
+curl -X POST http://localhost:3000/api/notifications/notification-1/events \
   -H 'authorization: ...' \
   -H 'content-type: application/json' \
-  -d '{ "notificationId": "notification-1", "type": "delivered", "datetime": "2019-12-24 12:00:00" }'
+  -d '{ "type": "delivered", "datetime": "2019-12-24 12:00:00" }'
 ```
 
 ### 3. Options

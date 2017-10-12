@@ -3,6 +3,7 @@ import {ApiKeys, SCOPES} from '../../models/apikey'
 
 export function post (route, handler) {
   Router.route(route, {where: 'server'}).post(function () {
+    this.request.params = this.params
     handle(this.request, this.response, handler, SCOPES.write)
   })
 }
