@@ -24,6 +24,9 @@ NotificationUsers.schema = new SimpleSchema({
   },
   expireAt: {
     type: Date, optional: true
+  },
+  createdAt: {
+    type: Date
   }
   // every other field is accepted
 })
