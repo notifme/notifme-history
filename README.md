@@ -19,9 +19,9 @@
 - [How to use](#how-to-use)
   - [1. Model](#1-model)
   - [2. API](#2-api)
-  - [3. Options](#3-options)
     - [POST /api/notification](#post-apinotification)
     - [POST /api/notification/event](#post-apinotificationevent)
+  - [3. Options](#3-options)
 - [Contributing](#contributing)
 - [Need help? Found a bug?](#need-help-found-a-bug)
 - [Related Projects](#related-projects)
@@ -32,9 +32,9 @@
 
 * **Configure data retention** — Decide until when each notification must be kept and set a capping on your MongoDB database.
 
-* **Auto-refresh** — The displayed notifications are automatically refreshed when they change or when new ones are created (with the help of [Meteor](https://www.meteor.com/)).
+* **Real-time data** — The displayed notifications are automatically refreshed when they change or when new ones are created (with the help of [Meteor](https://www.meteor.com/)).
 
-* **Search by user info** — All user fields are indexed and you can make complex searches [with negations and phrases](https://docs.mongodb.com/manual/reference/operator/query/text/#search-field).
+* **Search by user info** — All user fields are indexed and you can make [complex searches](https://docs.mongodb.com/manual/reference/operator/query/text/#search-field) with negations and phrases.
 
 * **User management** — An administrator can easily give or revoke access to any user.
 
@@ -63,9 +63,9 @@ $ docker run -d -p 80:3000 --name notifme-history notifme/history:dev-latest
 
 - [1. Model](#1-model)
 - [2. API](#2-api)
-- [3. Options](#3-options)
   - [POST /api/notification](#post-apinotification)
   - [POST /api/notification/event](#post-apinotificationevent)
+- [3. Options](#3-options)
 
 ### 1. Model
 
