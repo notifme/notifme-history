@@ -1,3 +1,4 @@
+/* global fetch */
 import PropTypes from 'prop-types'
 import React, {Component} from 'react'
 import {slide as Menu} from 'react-burger-menu'
@@ -11,8 +12,23 @@ import FaUsers from 'react-icons/lib/fa/user'
 import AccountsUIWrapper from './AccountsUIWrapper'
 
 export default class Navbar extends Component {
+  constructor (props) {
+    super(props)
+    this.state = {
+      lastVersion: null
+    }
+  }
+
+  componentDidMount () {
+    fetch('https://notifme-history-version.now.sh/api/version')
+      .then((response) => response.json())
+      .then((result) => this.setState({lastVersion: result.version}))
+      .catch(() => {})
+  }
+
   renderMenu () {
     const {version, currentUser, isGuest, isAdmin} = this.props
+    const {lastVersion} = this.state
     return (
       <div className='menu'>
         <Menu right>
@@ -46,6 +62,10 @@ export default class Navbar extends Component {
           ) : null}
           <div className='text-center mt-5' style={{fontSize: 16}}>
             <em>Version {version}</em>
+            <br />
+            {isAdmin && lastVersion && lastVersion > version
+              ? <em>(new version available: {lastVersion})</em>
+              : null}
           </div>
         </Menu>
       </div>
@@ -70,6 +90,7 @@ export default class Navbar extends Component {
 
 Navbar.propTypes = {
   version: PropTypes.string,
+  lastVersion: PropTypes.any,
   currentUser: PropTypes.object,
   isAdmin: PropTypes.bool,
   isGuest: PropTypes.bool

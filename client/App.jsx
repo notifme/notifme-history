@@ -3,6 +3,7 @@ import {Meteor} from 'meteor/meteor'
 import {createContainer} from 'meteor/react-meteor-data'
 import PropTypes from 'prop-types'
 import React, {Component} from 'react'
+import 'whatwg-fetch'
 
 import Navbar from './components/Navbar'
 import Page404 from './pages/404'
