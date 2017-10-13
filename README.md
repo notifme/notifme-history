@@ -45,7 +45,7 @@
 
 <br>
 <p align="center">
-  <img alt="Preview" src="https://notifme.github.io/notifme-history/img/preview.gif" />
+  <img alt="Preview" src="https://notifme.github.io/notifme-history/img/preview.gif?v=2" />
 </p>
 
 ## Getting Started
@@ -177,7 +177,7 @@ $ docker run -d \
 - 2. Deploy it with [Now](https://zeit.co/now): `npm i -g now && now login && now --public notifme/notifme-history`.
 Use `https://notifme-history-[your-company].now.sh` as `ROOT_URL` and `128` for `NOTIFICATION_DETAILS_LIMIT_MB`.
 
-- 3. Alias you deployment: `now alias https://notifme-history-[your-company]-[xxxxxxxxxx].now.sh notifme-history-[your-company]` and scale id: `now scale notifme-history-[your-company].now.sh 1`
+- 3. Alias you deployment: `now alias https://notifme-history-[your-company]-[xxxxxxxxxx].now.sh notifme-history-[your-company]` and scale it: `now scale notifme-history-[your-company].now.sh 1`
 
 And... there you go! :smiley_cat:
 
