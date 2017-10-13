@@ -85,6 +85,8 @@ Data is distributed into 3 main tables: `Notifications`, `NotificationDetails`, 
 
 #### POST /api/notifications
 
+Usage: when you send a notification to a user, call this API to add it to the history.
+
 | Field | Required | Type | Description |
 | --- | --- | --- | --- |
 | `id` | `false` | `String` | The external identifier of the notification. Required if you want to add events later on. |
@@ -127,6 +129,8 @@ curl -X POST http://localhost:3000/api/notifications \
 ```
 
 #### POST /api/notifications/:notificationId/events
+
+Usage: set up webhooks in all your favorite notification providers, then call this API to save the event.
 
 | Field | Required | Type | Description |
 | --- | --- | --- | --- |
