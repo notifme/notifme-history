@@ -12,7 +12,7 @@ if (Meteor.isServer) {
 export function setCapping () {
   const cappingMB = process.env.NOTIFICATION_DETAILS_LIMIT_MB
   if (cappingMB) {
-    const cappingInBytes = cappingMB * 10e6
+    const cappingInBytes = cappingMB * 1e6
     NotificationDetails._createCappedCollection(cappingInBytes)
 
     const updateCapping = () => {
